@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             x:Class="test_COApp.forwardCurvesPage">
+
+    <ScrollView>
+        <StackLayout Margin="15">
+            <Grid Padding="20"
+          Margin="0, 10, 0, 10">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Label Text="Date" Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product"/>
+                <DatePicker x:Name="base_date" Grid.Row="0" Grid.Column="1" FontFamily="product" DateSelected="base_date_DateChanged" Format="d"/>
+                <Label Text="Look Forward Period" Grid.Row="1" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product"/>
+                <Stepper x:Name="LookForward" Grid.Row="1" Grid.Column="1"
+                         Maximum="5"
+                         Minimum="1"
+                         ValueChanged="LookForward_ValueChanged"/>
+                <Label Text="{Binding Source={x:Reference LookForward}, Path=Value}"
+                   FontFamily="product"
+                   Grid.Row="2"
+                   Grid.Column="1"
+                   FontSize="Medium"/>
+                <Label Text="Compare Date" Grid.Row="3" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product"/>
+                <DatePicker x:Name="compare_dates" Grid.Row="3" Grid.Column="1" FontFamily="product"/>
+
+            </Grid>
+
+            <syncfusion:SfRadioGroup Orientation="Horizontal"  x:Name="radio1">
+                <syncfusion:SfRadioButton Text="Outright" ClassId="O"/>
+                <syncfusion:SfRadioButton Text="Spread" IsChecked="True" ClassId="S"/>
+                <syncfusion:SfRadioButton Text="Fly" ClassId="F"/>
+            </syncfusion:SfRadioGroup>
+
+            <syncfusion:SfRadioGroup Orientation="Horizontal"  x:Name="radioNum1">
+                <syncfusion:SfRadioButton Text="1" IsChecked="True" ClassId="1"/>
+                <syncfusion:SfRadioButton Text="3" ClassId="3"/>
+                <syncfusion:SfRadioButton Text="6" ClassId="6"/>
+                <syncfusion:SfRadioButton Text="12" ClassId="12"/>
+            </syncfusion:SfRadioGroup>
+
+            <chart:SfChart HeightRequest="250">
+                <chart:SfChart.PrimaryAxis>
+                    <chart:CategoryAxis LabelRotationAngle="90">
+                        <chart:CategoryAxis.Title>
+                            <chart:ChartAxisTitle Text="Outrights" />
+                        </chart:CategoryAxis.Title>
+                    </chart:CategoryAxis>
+                </chart:SfChart.PrimaryAxis>
+                <chart:SfChart.SecondaryAxis>
+                    <chart:NumericalAxis>
+                        <chart:NumericalAxis.Title>
+                            <chart:ChartAxisTitle Text="Settle Price (USD)" />
+                        </chart:NumericalAxis.Title>
+                    </chart:NumericalAxis>
+                </chart:SfChart.SecondaryAxis>
+                <chart:LineSeries x:Name="chart1"
+                                  ItemsSource="{Binding GraphView}"
+                                  XBindingPath="category" 
+                                  YBindingPath="settle"
+                                  EnableAnimation="True"
+                                  EnableDataPointSelection="True"
+                                  EnableTooltip="True"/>
+                <chart:SfChart.Legend>
+                    <chart:ChartLegend/>
+                </chart:SfChart.Legend>
+            </chart:SfChart>
+
+            <syncfusion:SfRadioGroup Orientation="Horizontal"  x:Name="radio2">
+                <syncfusion:SfRadioButton Text="Outright" ClassId="O"/>
+                <syncfusion:SfRadioButton Text="Spread" IsChecked="True" ClassId="S"/>
+                <syncfusion:SfRadioButton Text="Fly" ClassId="F"/>
+            </syncfusion:SfRadioGroup>
+            <syncfusion:SfRadioGroup Orientation="Horizontal"  x:Name="radioNum2">
+                <syncfusion:SfRadioButton Text="1" IsChecked="True" ClassId="1"/>
+                <syncfusion:SfRadioButton Text="3" ClassId="3"/>
+                <syncfusion:SfRadioButton Text="6" ClassId="6"/>
+                <syncfusion:SfRadioButton Text="12" ClassId="12"/>
+            </syncfusion:SfRadioGroup>
+
+            <chart:SfChart HeightRequest="250">
+                <chart:SfChart.Title>
+                    <chart:ChartTitle Text="Chart" />
+                </chart:SfChart.Title>
+                <chart:SfChart.PrimaryAxis>
+                    <chart:CategoryAxis LabelRotationAngle="90">
+                        <chart:CategoryAxis.Title>
+                            <chart:ChartAxisTitle Text="X Axis" />
+                        </chart:CategoryAxis.Title>
+                    </chart:CategoryAxis>
+                </chart:SfChart.PrimaryAxis>
+                <chart:SfChart.SecondaryAxis>
+                    <chart:NumericalAxis>
+                        <chart:NumericalAxis.Title>
+                            <chart:ChartAxisTitle Text="Y Axis" />
+                        </chart:NumericalAxis.Title>
+                    </chart:NumericalAxis>
+                </chart:SfChart.SecondaryAxis>
+                <chart:LineSeries x:Name="chart2"
+                                  ItemsSource="{Binding GraphView}"
+                                  XBindingPath="category" 
+                                  YBindingPath="settle"
+                                  EnableAnimation="True"
+                                  EnableDataPointSelection="True"
+                                  EnableTooltip="True"/>
+                <chart:SfChart.Legend>
+                    <chart:ChartLegend/>
+                </chart:SfChart.Legend>
+            </chart:SfChart>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
+    

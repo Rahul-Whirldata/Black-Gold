@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="test_COApp.introductionPage"
+             NavigationPage.HasNavigationBar="false">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="1,0"
+                             EndPoint="0,1">
+            <GradientStop Color="#ff669a"
+                          Offset="0.1"/>
+            <GradientStop Color="#6734fd"
+                          Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <StackLayout VerticalOptions="Center">
+        <Image Source="mainlogo" HeightRequest="100"/>
+
+        <Button Text="Login" TextTransform="None" 
+                CornerRadius="20"
+                Clicked="Button_Clicked_login"
+                Margin = "120, 50, 120, 20"
+                FontSize="Large"
+                FontFamily="product"
+                TextColor="White"
+                BorderWidth="5"
+                BorderColor="#01aef1"
+                BackgroundColor="Transparent"/>
+        <Button Text="Register" TextTransform="None" 
+                CornerRadius="20"
+                Clicked="Button_Clicked_register"
+                Margin="120, 10, 120, 10"
+                FontSize="Large"
+                FontFamily="product"
+                TextColor="White"
+                BackgroundColor="Transparent"
+                BorderWidth="5"
+                BorderColor="#01aef1"/>
+
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="test_COApp.registerPage"
+             NavigationPage.HasNavigationBar="False">
+    
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="1,0"
+                             EndPoint="0,1">
+            <GradientStop Color="#ff669a"
+                          Offset="0.1"/>
+            <GradientStop Color="#6734fd"
+                          Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    
+    <StackLayout VerticalOptions="Center">
+        <Entry Placeholder="New Username" 
+               Margin="50, 40, 50, 10" 
+               FontFamily="product"
+               PlaceholderColor="White"
+               TextColor="White"
+               FontSize="Large"/>
+        
+        <Entry Placeholder="New Password" 
+               IsPassword="True" 
+               Margin="50, 10, 50, 10" 
+               FontFamily="product" 
+               PlaceholderColor="White"
+               TextColor="White"
+               FontSize="Large"/>
+        
+        <Entry Placeholder="Confirm Password" 
+               IsPassword="True" 
+               Margin="50, 10, 50, 10" 
+               FontFamily="product"
+               PlaceholderColor="White"
+               TextColor="White"
+               FontSize="Large"/>
+        
+        <Button Text="Register" TextTransform="None" 
+                CornerRadius="20"
+                Margin="120, 20, 120, 10"
+                Clicked="Button_Clicked"
+                FontFamily="product"
+                FontSize="Large"
+                BackgroundColor="Transparent"
+                BorderWidth="5"
+                BorderColor="#01aef1"
+                TextColor="White"/>
+
+    </StackLayout>
+</ContentPage>
