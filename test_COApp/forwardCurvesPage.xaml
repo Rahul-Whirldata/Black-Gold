@@ -2,11 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
-             xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              x:Class="test_COApp.forwardCurvesPage">
 
+    
     <ScrollView>
-        <StackLayout Margin="15">
+        <StackLayout Margin="5">
             <Grid Padding="20"
           Margin="0, 10, 0, 10">
 
@@ -34,18 +34,10 @@
 
             </Grid>
 
-            <syncfusion:SfRadioGroup Orientation="Horizontal"  x:Name="radio1">
-                <syncfusion:SfRadioButton Text="Outright" ClassId="O"/>
-                <syncfusion:SfRadioButton Text="Spread" IsChecked="True" ClassId="S"/>
-                <syncfusion:SfRadioButton Text="Fly" ClassId="F"/>
-            </syncfusion:SfRadioGroup>
-
-            <syncfusion:SfRadioGroup Orientation="Horizontal"  x:Name="radioNum1">
-                <syncfusion:SfRadioButton Text="1" IsChecked="True" ClassId="1"/>
-                <syncfusion:SfRadioButton Text="3" ClassId="3"/>
-                <syncfusion:SfRadioButton Text="6" ClassId="6"/>
-                <syncfusion:SfRadioButton Text="12" ClassId="12"/>
-            </syncfusion:SfRadioGroup>
+            <Picker x:Name="picker1" SelectedIndexChanged="picker1_SelectedIndexChanged"
+                    FontFamily="product"/>
+            <Picker x:Name="pickerNum1" SelectedIndexChanged="picker1_SelectedIndexChanged"
+                    FontFamily="product"/>
 
             <chart:SfChart HeightRequest="250">
                 <chart:SfChart.PrimaryAxis>
@@ -63,28 +55,17 @@
                     </chart:NumericalAxis>
                 </chart:SfChart.SecondaryAxis>
                 <chart:LineSeries x:Name="chart1"
-                                  ItemsSource="{Binding GraphView}"
                                   XBindingPath="category" 
                                   YBindingPath="settle"
                                   EnableAnimation="True"
                                   EnableDataPointSelection="True"
                                   EnableTooltip="True"/>
-                <chart:SfChart.Legend>
-                    <chart:ChartLegend/>
-                </chart:SfChart.Legend>
             </chart:SfChart>
 
-            <syncfusion:SfRadioGroup Orientation="Horizontal"  x:Name="radio2">
-                <syncfusion:SfRadioButton Text="Outright" ClassId="O"/>
-                <syncfusion:SfRadioButton Text="Spread" IsChecked="True" ClassId="S"/>
-                <syncfusion:SfRadioButton Text="Fly" ClassId="F"/>
-            </syncfusion:SfRadioGroup>
-            <syncfusion:SfRadioGroup Orientation="Horizontal"  x:Name="radioNum2">
-                <syncfusion:SfRadioButton Text="1" IsChecked="True" ClassId="1"/>
-                <syncfusion:SfRadioButton Text="3" ClassId="3"/>
-                <syncfusion:SfRadioButton Text="6" ClassId="6"/>
-                <syncfusion:SfRadioButton Text="12" ClassId="12"/>
-            </syncfusion:SfRadioGroup>
+            <Picker x:Name="picker2" SelectedIndexChanged="picker2_SelectedIndexChanged"
+                    FontFamily="product"/>
+            <Picker x:Name="pickerNum2" SelectedIndexChanged="picker2_SelectedIndexChanged"
+                    FontFamily="product"/>
 
             <chart:SfChart HeightRequest="250">
                 <chart:SfChart.Title>
@@ -105,18 +86,14 @@
                     </chart:NumericalAxis>
                 </chart:SfChart.SecondaryAxis>
                 <chart:LineSeries x:Name="chart2"
-                                  ItemsSource="{Binding GraphView}"
                                   XBindingPath="category" 
                                   YBindingPath="settle"
                                   EnableAnimation="True"
                                   EnableDataPointSelection="True"
                                   EnableTooltip="True"/>
-                <chart:SfChart.Legend>
-                    <chart:ChartLegend/>
-                </chart:SfChart.Legend>
+
             </chart:SfChart>
 
         </StackLayout>
     </ScrollView>
 </ContentPage>
-    
