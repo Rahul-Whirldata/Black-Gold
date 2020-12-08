@@ -24,26 +24,41 @@
                          Maximum="5"
                          Minimum="1"
                          ValueChanged="LookForward_ValueChanged"/>
+                
                 <Label Text="{Binding Source={x:Reference LookForward}, Path=Value}"
                    FontFamily="product"
                    Grid.Row="2"
                    Grid.Column="1"
                    FontSize="Medium"/>
                 <Label Text="Compare Date" Grid.Row="3" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product"/>
-                <DatePicker x:Name="compare_dates" Grid.Row="3" Grid.Column="1" FontFamily="product"/>
+                <DatePicker x:Name="compare_dates" Grid.Row="3" Grid.Column="1" FontFamily="product" DateSelected="compare_dates_DateSelected"/>
 
             </Grid>
-
+            <ListView x:Name="compareDateListView" 
+                      ItemTapped="compareDateListView_ItemTapped"
+                      HasUnevenRows="True" HeightRequest="250">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding .}"
+                                   TextColor="Black"
+                                   FontSize="Medium"
+                                   FontFamily="product"
+                                   Padding="5"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <Picker x:Name="picker1" SelectedIndexChanged="picker1_SelectedIndexChanged"
                     FontFamily="product"/>
             <Picker x:Name="pickerNum1" SelectedIndexChanged="picker1_SelectedIndexChanged"
                     FontFamily="product"/>
 
-            <chart:SfChart HeightRequest="250">
+            <chart:SfChart HeightRequest="250" x:Name="mainChart1">
                 <chart:SfChart.PrimaryAxis>
                     <chart:CategoryAxis LabelRotationAngle="90">
                         <chart:CategoryAxis.Title>
-                            <chart:ChartAxisTitle Text="Outrights" />
+                            <chart:ChartAxisTitle Text="{Binding Source={x:Reference picker1}, Path=SelectedItem}" />
                         </chart:CategoryAxis.Title>
                     </chart:CategoryAxis>
                 </chart:SfChart.PrimaryAxis>
@@ -67,21 +82,18 @@
             <Picker x:Name="pickerNum2" SelectedIndexChanged="picker2_SelectedIndexChanged"
                     FontFamily="product"/>
 
-            <chart:SfChart HeightRequest="250">
-                <chart:SfChart.Title>
-                    <chart:ChartTitle Text="Chart" />
-                </chart:SfChart.Title>
+            <chart:SfChart HeightRequest="250" x:Name="mainChart2">
                 <chart:SfChart.PrimaryAxis>
                     <chart:CategoryAxis LabelRotationAngle="90">
                         <chart:CategoryAxis.Title>
-                            <chart:ChartAxisTitle Text="X Axis" />
+                            <chart:ChartAxisTitle Text="{Binding Source={x:Reference picker2}, Path=SelectedItem}" />
                         </chart:CategoryAxis.Title>
                     </chart:CategoryAxis>
                 </chart:SfChart.PrimaryAxis>
                 <chart:SfChart.SecondaryAxis>
                     <chart:NumericalAxis>
                         <chart:NumericalAxis.Title>
-                            <chart:ChartAxisTitle Text="Y Axis" />
+                            <chart:ChartAxisTitle Text="Settle Price (USD)" />
                         </chart:NumericalAxis.Title>
                     </chart:NumericalAxis>
                 </chart:SfChart.SecondaryAxis>
@@ -93,7 +105,6 @@
                                   EnableTooltip="True"/>
 
             </chart:SfChart>
-
         </StackLayout>
     </ScrollView>
 </ContentPage>

@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,6 +17,17 @@ namespace test_COApp
     {
         public string category { get; set; }
         public double settle { get; set; }
+        public double settle1 { get; set; }
+        public string settle1_desc { get; set; }
+        public double settle2 { set; get; }
+        public string settle2_desc { get; set; }
+        public double settle3 { get; set; }
+        public string settle3_desc { get; set; }
+        public double settle4 { get; set; }
+        public string settle4_desc { get; set; }
+        public double settle5 { get; set; }
+        public string settle5_desc { get; set; }
+
     }
     public class GraphViewModel
     {
@@ -33,6 +45,7 @@ namespace test_COApp
     }
     public partial class forwardCurvesPage : ContentPage
     {
+        ObservableCollection<string> compareDateList = new ObservableCollection<string>();
         async private void DataProvider(json inputjson, int Id)
         {
             var values = inputjson;
@@ -96,6 +109,8 @@ namespace test_COApp
             picknum2.Add("12");
             pickerNum2.ItemsSource = picknum2;
             pickerNum2.SelectedIndex = 0;
+
+            compareDateListView.ItemsSource = compareDateList;
         }
 
         private void base_date_DateChanged(object sender, DateChangedEventArgs e)
@@ -336,6 +351,28 @@ namespace test_COApp
             finally
             {
                 Debug.WriteLine("executed without error! - picker 2");
+            }
+        }
+
+        private void compareDateListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            compareDateList.Remove(e.Item.ToString());
+            if (compareDateList.Count < 5)
+            {
+                compare_dates.IsEnabled = true;
+            }
+            
+        }
+
+        private void compare_dates_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            if (compareDateList.Count < 5)
+            {
+                compareDateList.Add(compare_dates.Date.ToString("yyyy-MM-dd"));
+            }
+            else if (compareDateList.Count < 5)
+            {
+                compare_dates.IsEnabled = false;
             }
         }
     }
