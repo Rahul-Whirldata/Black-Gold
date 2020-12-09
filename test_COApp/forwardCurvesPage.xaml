@@ -17,9 +17,9 @@
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
 
-                <Label Text="Date" Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product"/>
+                <Label Text="Date" Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product" FontSize="Medium" TextColor="Black"/>
                 <DatePicker x:Name="base_date" Grid.Row="0" Grid.Column="1" FontFamily="product" DateSelected="base_date_DateChanged" Format="d"/>
-                <Label Text="Look Forward Period" Grid.Row="1" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product"/>
+                <Label Text="Look Forward Period" Grid.Row="1" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product" FontSize="Medium" TextColor="Black"/>
                 <Stepper x:Name="LookForward" Grid.Row="1" Grid.Column="1"
                          Maximum="5"
                          Minimum="1"
@@ -29,14 +29,15 @@
                    FontFamily="product"
                    Grid.Row="2"
                    Grid.Column="1"
-                   FontSize="Medium"/>
-                <Label Text="Compare Date" Grid.Row="3" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product"/>
+                   FontSize="Medium"
+                   TextColor="Black"/>
+                <Label Text="Compare Date" Grid.Row="3" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product" FontSize="Medium" TextColor="Black"/>
                 <DatePicker x:Name="compare_dates" Grid.Row="3" Grid.Column="1" FontFamily="product" DateSelected="compare_dates_DateSelected"/>
 
             </Grid>
             <ListView x:Name="compareDateListView" 
                       ItemTapped="compareDateListView_ItemTapped"
-                      HasUnevenRows="True" HeightRequest="250">
+                      HasUnevenRows="True" HeightRequest="180">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -69,12 +70,6 @@
                         </chart:NumericalAxis.Title>
                     </chart:NumericalAxis>
                 </chart:SfChart.SecondaryAxis>
-                <chart:LineSeries x:Name="chart1"
-                                  XBindingPath="category" 
-                                  YBindingPath="settle"
-                                  EnableAnimation="True"
-                                  EnableDataPointSelection="True"
-                                  EnableTooltip="True"/>
             </chart:SfChart>
 
             <Picker x:Name="picker2" SelectedIndexChanged="picker2_SelectedIndexChanged"
@@ -97,13 +92,6 @@
                         </chart:NumericalAxis.Title>
                     </chart:NumericalAxis>
                 </chart:SfChart.SecondaryAxis>
-                <chart:LineSeries x:Name="chart2"
-                                  XBindingPath="category" 
-                                  YBindingPath="settle"
-                                  EnableAnimation="True"
-                                  EnableDataPointSelection="True"
-                                  EnableTooltip="True"/>
-
             </chart:SfChart>
         </StackLayout>
     </ScrollView>
