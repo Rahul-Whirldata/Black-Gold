@@ -3,8 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="test_COApp.analyzePage">
     <ScrollView>
-        <Grid>
+        <StackLayout Margin="5">
+            <Grid Padding="20" Margin="0, 10, 0, 10">
+                <Label Text="Lookback Window" TextColor="Black" FontSize="Medium" FontFamily="product"
+                       Grid.Row="0" Grid.Column="0"/>
+                <Picker x:Name="lookbackWindow" FontFamily="product" FontSize="Medium"
+                        Grid.Row="0" Grid.Column="1"/>
+                <Label Text="As on Date" TextColor="Black" FontSize="Medium" FontFamily="product"
+                       Grid.Row="1" Grid.Column="0"/>
+                <DatePicker x:Name="asOnDate" FontFamily="product" FontSize="Medium" Format="d" DateSelected="asOnDate_DateSelected"
+                            Grid.Row="1" Grid.Column="1"/>
+                <Picker x:Name="pickContract" FontFamily="product" FontSize="Medium" TextColor="Black" 
+                        Grid.Row="2" Grid.Column="0"/>
+                <Picker x:Name="buySell" FontFamily="product" FontSize="Medium" TextColor="Black"
+                        Grid.Row="2" Grid.Column="1"/>
+                <Button Text="Add" TextTransform="None" CornerRadius="20" FontSize="Medium" FontFamily="product" TextColor="white"
+                        BackgroundColor="LawnGreen" Clicked="Add_Button_Clicked"
+                        Grid.Row="3" Grid.Column="0"/>
+                <Button Text="Reset" TextTransform="None" CornerRadius="20" FontSize="Medium" FontFamily="product" TextColor="White"
+                        BackgroundColor="Red"
+                        Grid.Row="3" Grid.Column="1"/>
+                <Label x:Name="portfolioEquation" FontSize="Medium" FontFamily="product" TextColor="#01aef1"
+                       Grid.Row="4" Grid.ColumnSpan="2"/>
+                <Button Text="Analyze" TextTransform="None" CornerRadius="20" FontSize="Medium" FontFamily="product" TextColor="White"
+                        BackgroundColor="#01aef1" Margin="120, 0, 120, 0" Clicked="Analyze_Button_Clicked"
+                        Grid.Row="5" Grid.ColumnSpan="2"/>
+            </Grid>
+            <Picker x:Name="graphtype1" FontFamily="product" FontSize="Medium" TextColor="Black"/>
+
+            <Picker x:Name="fly" FontFamily="product" FontSize="Medium" TextColor="Black"/>
+            <Picker x:Name="graphtype2" FontFamily="product" FontSize="Medium" TextColor="Black"/>
             
-        </Grid>
+        </StackLayout>
     </ScrollView>
 </ContentPage>
