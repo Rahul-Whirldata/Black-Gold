@@ -32,8 +32,10 @@
             </Grid>
             <Picker x:Name="graphtype1" FontFamily="product" FontSize="Medium" TextColor="Black" SelectedIndexChanged="Analyze_Button_Clicked"/>
 
-            <Label x:Name="regression" FontSize="Medium" FontFamily="product"/>
-            <Label x:Name="polyregression" FontSize="Medium" FontFamily="product"/>
+            <Label x:Name="regression" FontSize="Small"  FontFamily="product" TextColor="Blue"/>
+            <Label x:Name="polyregression" FontSize="Small" FontFamily="product" TextColor="LightBlue"/>
+            <Label x:Name="r2regression" FontSize="Small"  FontFamily="product" TextColor="Blue"/>
+            <Label x:Name="r2polyregression" FontSize="Small" FontFamily="product" TextColor="LightBlue"/>
 
             <chart:SfChart x:Name="mainchart1" HeightRequest="300">
                 <chart:SfChart.PrimaryAxis>
@@ -55,8 +57,10 @@
             <Picker x:Name="fly" FontFamily="product" FontSize="Medium" TextColor="Black" SelectedIndexChanged="Analyze_Button_Clicked"/>
             <Picker x:Name="graphtype2" FontFamily="product" FontSize="Medium" TextColor="Black" SelectedIndexChanged="Analyze_Button_Clicked"/>
 
-            <Label x:Name="regression1" FontSize="Medium" FontFamily="product"/>
-            <Label x:Name="polyregression1" FontSize="Medium" FontFamily="product"/>
+            <Label x:Name="regression1" FontSize="Small"  FontFamily="product" TextColor="Blue"/>
+            <Label x:Name="polyregression1" FontSize="Small" FontFamily="product" TextColor="LightBlue"/>
+            <Label x:Name="r2regression1" FontSize="Small"  FontFamily="product" TextColor="Blue"/>
+            <Label x:Name="r2polyregression1" FontSize="Small" FontFamily="product" TextColor="LightBlue"/>
 
             <chart:SfChart x:Name="mainchart2" HeightRequest="300">
                 <chart:SfChart.PrimaryAxis>

@@ -51,7 +51,7 @@ namespace test_COApp
         {
             var values = inputjson;
             var client = new HttpClient();
-            client.BaseAddress = new Uri("http://192.168.1.169:5000");
+            client.BaseAddress = new Uri("http://ec2-3-94-188-74.compute-1.amazonaws.com:5000");
 
             string jsondata = JsonConvert.SerializeObject(values);
             var content = new StringContent(jsondata, Encoding.UTF8, "application/json");

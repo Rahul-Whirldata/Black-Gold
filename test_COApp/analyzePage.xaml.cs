@@ -120,7 +120,7 @@ namespace test_COApp
                 asOnDate = e.NewDate.ToString("yyyy-MM-dd")
             };
             var client = new HttpClient();
-            client.BaseAddress = new Uri("http://192.168.1.169:5000");
+            client.BaseAddress = new Uri("http://ec2-3-94-188-74.compute-1.amazonaws.com:5000");
 
             string jsondata = JsonConvert.SerializeObject(selected_date);
             var content = new StringContent(jsondata, Encoding.UTF8, "application/json");
@@ -246,7 +246,7 @@ namespace test_COApp
                 };
 
                 var client = new HttpClient();
-                client.BaseAddress = new Uri("http://192.168.1.169:5000");
+                client.BaseAddress = new Uri("http://ec2-3-94-188-74.compute-1.amazonaws.com:5000");
                 string jsondata = JsonConvert.SerializeObject(value);
                 var content = new StringContent(jsondata, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await client.PostAsync("/analyzegraphdata", content);
@@ -255,8 +255,10 @@ namespace test_COApp
                 Debug.WriteLine("regression data deserialized");
                 var graphDataCollection = JsonConvert.DeserializeObject<graphDataViewModel>(json);
 
-                regression.Text = regressionDataCollection.RegressionDetails.ElementAt(0).equation;
-                polyregression.Text = regressionDataCollection.RegressionDetails.ElementAt(0).PolyEquation;
+                regression.Text = "Equation : " + regressionDataCollection.RegressionDetails.ElementAt(0).equation;
+                polyregression.Text = "Equation : " + regressionDataCollection.RegressionDetails.ElementAt(0).PolyEquation;
+                r2regression.Text = "R^2 = " + regressionDataCollection.RegressionDetails.ElementAt(0).rsquared;
+                r2polyregression.Text = "R^2 = " + regressionDataCollection.RegressionDetails.ElementAt(0).rsquaredPoly;
 
                 ScatterSeries scatterSeries = new ScatterSeries()
                 {
@@ -320,7 +322,7 @@ namespace test_COApp
                 };
                 
                 var client1 = new HttpClient();
-                client1.BaseAddress = new Uri("http://192.168.1.169:5000");
+                client1.BaseAddress = new Uri("http://ec2-3-94-188-74.compute-1.amazonaws.com:5000");
                 string jsondata1 = JsonConvert.SerializeObject(value1);
                 var content1 = new StringContent(jsondata1, Encoding.UTF8, "application/json");
                 HttpResponseMessage response1 = await client1.PostAsync("/analyzegraphdata", content1);
@@ -329,8 +331,10 @@ namespace test_COApp
                 Debug.WriteLine("regression data deserialized");
                 var graphDataCollection1 = JsonConvert.DeserializeObject<graphDataViewModel>(json1);
 
-                regression1.Text = regressionDataCollection1.RegressionDetails.ElementAt(0).equation;
-                polyregression1.Text = regressionDataCollection1.RegressionDetails.ElementAt(0).PolyEquation;
+                regression1.Text = "Equation : " + regressionDataCollection1.RegressionDetails.ElementAt(0).equation;
+                polyregression1.Text = "Equation : " + regressionDataCollection1.RegressionDetails.ElementAt(0).PolyEquation;
+                r2regression1.Text = "R^2 = " + regressionDataCollection1.RegressionDetails.ElementAt(0).rsquared;
+                r2polyregression1.Text = "R^2 = " + regressionDataCollection1.RegressionDetails.ElementAt(0).rsquaredPoly;
 
                 ScatterSeries scatterSeries1 = new ScatterSeries()
                 {
@@ -396,8 +400,12 @@ namespace test_COApp
 
             regression.Text = "";
             regression1.Text = "";
+            r2regression.Text = "";
+            r2regression1.Text = "";
             polyregression.Text = "";
             polyregression1.Text = "";
+            r2polyregression.Text = "";
+            r2polyregression1.Text = "";
 
             mainchart1.Series.Clear();
             mainchart2.Series.Clear();
@@ -452,7 +460,7 @@ namespace test_COApp
         //    };
 
         //    var client = new HttpClient();
-        //    client.BaseAddress = new Uri("http://192.168.1.169:5000");
+        //    client.BaseAddress = new Uri("http://ec2-3-94-188-74.compute-1.amazonaws.com:5000");
         //    string jsondata = JsonConvert.SerializeObject(value);
         //    var content = new StringContent(jsondata, Encoding.UTF8, "application/json");
         //    HttpResponseMessage response = await client.PostAsync("/analyzegraphdata", content);
@@ -544,7 +552,7 @@ namespace test_COApp
         //    };
 
         //    var client1 = new HttpClient();
-        //    client1.BaseAddress = new Uri("http://192.168.1.169:5000");
+        //    client1.BaseAddress = new Uri("http://ec2-3-94-188-74.compute-1.amazonaws.com:5000");
         //    string jsondata1 = JsonConvert.SerializeObject(value1);
         //    var content1 = new StringContent(jsondata1, Encoding.UTF8, "application/json");
         //    HttpResponseMessage response1 = await client1.PostAsync("/analyzegraphdata", content1);
@@ -636,7 +644,7 @@ namespace test_COApp
         //    };
 
         //    var client1 = new HttpClient();
-        //    client1.BaseAddress = new Uri("http://192.168.1.169:5000");
+        //    client1.BaseAddress = new Uri("http://ec2-3-94-188-74.compute-1.amazonaws.com:5000");
         //    string jsondata1 = JsonConvert.SerializeObject(value1);
         //    var content1 = new StringContent(jsondata1, Encoding.UTF8, "application/json");
         //    HttpResponseMessage response1 = await client1.PostAsync("/analyzegraphdata", content1);
