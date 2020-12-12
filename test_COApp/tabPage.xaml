@@ -9,10 +9,10 @@
             >
 
     
-    <local:forwardCurvesPage IconImageSource="forwardCurves"/>
-    <local:analyzePage IconImageSource="analyze"/>
-    <local:comparePortfolioPage IconImageSource="comparePorfolio"/>
-    <local:recommendationPage IconImageSource="Recommendation"/>
+    <local:forwardCurvesPage IconImageSource="forwardCurves" BackgroundColor="White"/>
+    <local:analyzePage IconImageSource="analyze" BackgroundColor="White"/>
+    <local:comparePortfolioPage IconImageSource="comparePorfolio" BackgroundColor="White"/>
+    <local:recommendationPage IconImageSource="Recommendation" BackgroundColor="White"/>
 
 </TabbedPage>
   

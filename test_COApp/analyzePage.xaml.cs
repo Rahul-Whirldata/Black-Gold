@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Syncfusion.SfChart.XForms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -73,8 +74,8 @@ namespace test_COApp
         string equation = "";
         int buyCount = 0;
         int sellCount = 0;
-        List<string> portfolioContracts = new List<string>() { "test" };
-        List<Dictionary<string, string>> portfoliojson = new List<Dictionary<string, string>>();
+        List<string> portfolioContracts = new List<string>();
+        List<string> portfolioContractsQty = new List<string>();
         public analyzePage()
         {
             InitializeComponent();
@@ -119,7 +120,7 @@ namespace test_COApp
                 asOnDate = e.NewDate.ToString("yyyy-MM-dd")
             };
             var client = new HttpClient();
-            client.BaseAddress = new Uri("http://192.168.1.169:5000");
+            client.BaseAddress = new Uri("http://192.168.1.3:5000");
 
             string jsondata = JsonConvert.SerializeObject(selected_date);
             var content = new StringContent(jsondata, Encoding.UTF8, "application/json");
@@ -151,9 +152,16 @@ namespace test_COApp
                     equation += temp;
                     buyCount += 1;
                     portfolioEquation.Text = equation;
+                    portfolioContractsQty.Add("1");
                     portfolioContracts.Add(pickContract.SelectedItem.ToString().Substring(0, 11));
+                    fly.ItemsSource = null;
                     fly.ItemsSource = portfolioContracts;
                     fly.SelectedIndex = 1;
+                    Debug.WriteLine("buy added");
+                    foreach (var i in portfolioContracts)
+                    {
+                        Debug.WriteLine(i);
+                    }
                 }
                 else
                 {
@@ -168,9 +176,16 @@ namespace test_COApp
                     equation += temp;
                     sellCount += 1;
                     portfolioEquation.Text = equation;
+                    portfolioContractsQty.Add("-1");
                     portfolioContracts.Add(pickContract.SelectedItem.ToString().Substring(0, 11));
+                    fly.ItemsSource = null;
                     fly.ItemsSource = portfolioContracts;
                     fly.SelectedIndex = 1;
+                    Debug.WriteLine("sell added");
+                    foreach (var i in portfolioContracts)
+                    {
+                        Debug.WriteLine(i);
+                    }
                 }
                 else
                 {
@@ -182,49 +197,488 @@ namespace test_COApp
 
         async private void Analyze_Button_Clicked(object sender, EventArgs e)
         {
-
-            Dictionary<string, string> temp = new Dictionary<string, string>()
+            try
             {
-                {"Qty", "1"},
-                {"contract", portfolioContracts[1] }
-            };
-            portfoliojson.Add(temp);
+                mainchart1.Series.Clear();
+                mainchart2.Series.Clear();
 
-            Dictionary<string, string> temp1 = new Dictionary<string, string>()
+                List<Dictionary<string, string>> portfoliojson = new List<Dictionary<string, string>>();
+                Dictionary<string, string> temp = new Dictionary<string, string>();
+
+                temp.Add("Qty", portfolioContractsQty[0].ToString());
+                temp.Add("contract", portfolioContracts[0].ToString());
+
+                portfoliojson.Add(temp);
+
+                Dictionary<string, string> temp1 = new Dictionary<string, string>();
+
+                temp1.Add("Qty", portfolioContractsQty[1].ToString());
+                temp1.Add("contract", portfolioContracts[1].ToString());
+
+                portfoliojson.Add(temp1);
+                //------------------------------------Graph data 1--------------------------------------------------------
+                string graphtype = null;
+
+                if (graphtype1.SelectedItem.ToString() == "Combined vs Outright")
+                {
+                    graphtype = "CombinedVsOutright";
+                }
+                else if (graphtype1.SelectedItem.ToString() == "Fly vs Fly Regression")
+                {
+                    graphtype = "flyRegressionPoly";
+                }
+                else if (graphtype1.SelectedItem.ToString() == "Fly vs Average Outright")
+                {
+                    graphtype = "FlyVsAvgOutright";
+                }
+                else if (graphtype1.SelectedItem.ToString() == "Fly vs Outright")
+                {
+                    graphtype = "FlyVsOutright";
+                }
+
+                var value = new test_COApp.AnalyzeDataPostJson()
+                {
+                    asOnDate = asOnDate.Date.ToString("yyyy-MM-dd"),
+                    portfolio = portfoliojson,
+                    lookback = lookbackWindow.SelectedItem.ToString(),
+                    graphType = graphtype,
+                    fly = fly.SelectedItem.ToString()
+                };
+
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("http://192.168.1.3:5000");
+                string jsondata = JsonConvert.SerializeObject(value);
+                var content = new StringContent(jsondata, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync("/analyzegraphdata", content);
+                var json = await response.Content.ReadAsStringAsync();
+                var regressionDataCollection = JsonConvert.DeserializeObject<RegressioDetailsViewModel>(json);
+                Debug.WriteLine("regression data deserialized");
+                var graphDataCollection = JsonConvert.DeserializeObject<graphDataViewModel>(json);
+
+                regression.Text = regressionDataCollection.RegressionDetails.ElementAt(0).equation;
+                polyregression.Text = regressionDataCollection.RegressionDetails.ElementAt(0).PolyEquation;
+
+                ScatterSeries scatterSeries = new ScatterSeries()
+                {
+                    ItemsSource = graphDataCollection.GraphData,
+                    XBindingPath = "Chartx",
+                    YBindingPath = "Scattery",
+                    EnableAnimation = true,
+                    StrokeColor = Color.Orange,
+                    StrokeWidth = 2
+                };
+                mainchart1.Series.Add(scatterSeries);
+
+                SplineSeries splineSeriesreg = new SplineSeries()
+                {
+                    ItemsSource = graphDataCollection.GraphData,
+                    XBindingPath = "Chartx",
+                    YBindingPath = "Regressiony",
+                    Color = Color.Blue,
+                    EnableAnimation = true
+                };
+
+                mainchart1.Series.Add(splineSeriesreg);
+
+                SplineSeries polysplineSeries = new SplineSeries()
+                {
+                    ItemsSource = graphDataCollection.GraphData,
+                    XBindingPath = "Chartx",
+                    YBindingPath = "PolyRegressiony",
+                    Color = Color.LightBlue,
+                    EnableAnimation = true
+                };
+
+                mainchart1.Series.Add(polysplineSeries);
+                //-----------------------------------------------------graph data 2------------------------------------------
+                string graphtype0 = null;
+
+                if (graphtype2.SelectedItem.ToString() == "Combined vs Outright")
+                {
+                    graphtype0 = "CombinedVsOutright";
+                }
+                else if (graphtype2.SelectedItem.ToString() == "Fly vs Fly Regression")
+                {
+                    graphtype0 = "flyRegressionPoly";
+                }
+                else if (graphtype2.SelectedItem.ToString() == "Fly vs Average Outright")
+                {
+                    graphtype0 = "FlyVsAvgOutright";
+                }
+                else if (graphtype2.SelectedItem.ToString() == "Fly vs Outright")
+                {
+                    graphtype0 = "FlyVsOutright";
+                }
+                
+                var value1 = new test_COApp.AnalyzeDataPostJson()
+                {
+                    asOnDate = asOnDate.Date.ToString("yyyy-MM-dd"),
+                    portfolio = portfoliojson,
+                    lookback = lookbackWindow.SelectedItem.ToString(),
+                    graphType = graphtype0,
+                    fly = fly.SelectedItem.ToString()
+                };
+                
+                var client1 = new HttpClient();
+                client1.BaseAddress = new Uri("http://192.168.1.3:5000");
+                string jsondata1 = JsonConvert.SerializeObject(value1);
+                var content1 = new StringContent(jsondata1, Encoding.UTF8, "application/json");
+                HttpResponseMessage response1 = await client1.PostAsync("/analyzegraphdata", content1);
+                var json1 = await response1.Content.ReadAsStringAsync();
+                var regressionDataCollection1 = JsonConvert.DeserializeObject<RegressioDetailsViewModel>(json1);
+                Debug.WriteLine("regression data deserialized");
+                var graphDataCollection1 = JsonConvert.DeserializeObject<graphDataViewModel>(json1);
+
+                regression1.Text = regressionDataCollection1.RegressionDetails.ElementAt(0).equation;
+                polyregression1.Text = regressionDataCollection1.RegressionDetails.ElementAt(0).PolyEquation;
+
+                ScatterSeries scatterSeries1 = new ScatterSeries()
+                {
+                    ItemsSource = graphDataCollection1.GraphData,
+                    XBindingPath = "Chartx",
+                    YBindingPath = "Scattery",
+                    EnableAnimation = true,
+                    StrokeColor = Color.Orange,
+                    StrokeWidth = 2
+                };
+                mainchart2.Series.Add(scatterSeries1);
+
+                SplineSeries splineSeriesreg1 = new SplineSeries()
+                {
+                    ItemsSource = graphDataCollection1.GraphData,
+                    XBindingPath = "Chartx",
+                    YBindingPath = "Regressiony",
+                    Color = Color.Blue,
+                    EnableAnimation = true
+                };
+
+                mainchart2.Series.Add(splineSeriesreg1);
+
+                SplineSeries polysplineSeries1 = new SplineSeries()
+                {
+                    ItemsSource = graphDataCollection1.GraphData,
+                    XBindingPath = "Chartx",
+                    YBindingPath = "PolyRegressiony",
+                    Color = Color.LightBlue,
+                    EnableAnimation = true
+                };
+
+                mainchart2.Series.Add(polysplineSeries1);
+            }
+            catch (Exception r)
             {
-                {"Qty", "-1"},
-                {"contract", portfolioContracts[2] }
-            };
-            portfoliojson.Add(temp1);
-
-            var value = new AnalyzeDataPostJson()
+                Debug.WriteLine(r);
+            }
+            finally
             {
-                asOnDate = asOnDate.Date.ToString("yyyy-MM-dd"),
-                portfolio = portfoliojson,
-                lookback = lookbackWindow.SelectedItem.ToString(),
-                graphType = graphtype1.SelectedItem.ToString(),
-                fly = fly.SelectedItem.ToString()
-            };
+                Debug.WriteLine("ran successfully!");
+            }
+        }
 
-            var client = new HttpClient();
-            client.BaseAddress = new Uri("http://192.168.1.169:5000");
+        private void Reset_Button_Clicked(object sender, EventArgs e)
+        {
+            populateContract.Clear();
+            equation = "";
+            buyCount = 0;
+            sellCount = 0;
+            portfolioContracts.Clear();
+            portfolioContractsQty.Clear();
 
-            string jsondata = JsonConvert.SerializeObject(value);
-            var content = new StringContent(jsondata, Encoding.UTF8, "application/json");
+            lookbackWindow.SelectedIndex = 0;
+            asOnDate.Date = DateTime.Today.Date;
+            pickContract.ItemsSource = null;
+            pickContract.IsEnabled = false;
+            buySell.SelectedIndex = 0;
+            portfolioEquation.Text = equation;
+            graphtype1.SelectedIndex = 0;
+            fly.ItemsSource = null;
+            graphtype2.SelectedIndex = 0;
 
-            Debug.WriteLine("content before sending api call -----> " + content);
+            regression.Text = "";
+            regression1.Text = "";
+            polyregression.Text = "";
+            polyregression1.Text = "";
 
-            HttpResponseMessage response = await client.PostAsync("/analyzegraphdata", content);
-
-            var json = await response.Content.ReadAsStringAsync();
-            Debug.WriteLine("json after sending api call -----> " + json);
-            var regressionDataCollection = JsonConvert.DeserializeObject<RegressioDetailsViewModel>(json);
-            Debug.WriteLine("regression data deserialized");
-            var graphDataCollection = JsonConvert.DeserializeObject<graphDataViewModel>(json);
-
-            Debug.WriteLine(regressionDataCollection);
-            Debug.WriteLine(graphDataCollection);
+            mainchart1.Series.Clear();
+            mainchart2.Series.Clear();
 
         }
+
+        //async private void graphtype1_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    mainchart1.Series.Clear();
+
+        //    List<Dictionary<string, string>> portfoliojson = new List<Dictionary<string, string>>();
+        //    Dictionary<string, string> temp = new Dictionary<string, string>();
+
+        //    temp.Add("Qty", portfolioContractsQty[0].ToString());
+        //    temp.Add("contract", portfolioContracts[0].ToString());
+
+        //    portfoliojson.Add(temp);
+
+        //    Dictionary<string, string> temp1 = new Dictionary<string, string>();
+
+        //    temp1.Add("Qty", portfolioContractsQty[1].ToString());
+        //    temp1.Add("contract", portfolioContracts[1].ToString());
+
+        //    portfoliojson.Add(temp1);
+        //    //---------------------------------------graph data 1---------------------------------------------
+        //    string graphtype = null;
+
+        //    if (graphtype1.SelectedItem.ToString() == "Combined vs Outright")
+        //    {
+        //        graphtype = "CombinedVsOutright";
+        //    }
+        //    else if (graphtype1.SelectedItem.ToString() == "Fly vs Fly Regression")
+        //    {
+        //        graphtype = "flyRegressionPoly";
+        //    }
+        //    else if (graphtype1.SelectedItem.ToString() == "Fly vs Average Outright")
+        //    {
+        //        graphtype = "FlyVsAvgOutright";
+        //    }
+        //    else if (graphtype1.SelectedItem.ToString() == "Fly vs Outright")
+        //    {
+        //        graphtype = "FlyVsOutright";
+        //    }
+
+        //    var value = new AnalyzeDataPostJson()
+        //    {
+        //        asOnDate = asOnDate.Date.ToString("yyyy-MM-dd"),
+        //        portfolio = portfoliojson,
+        //        lookback = lookbackWindow.SelectedItem.ToString(),
+        //        graphType = graphtype,
+        //        fly = fly.SelectedItem.ToString()
+        //    };
+
+        //    var client = new HttpClient();
+        //    client.BaseAddress = new Uri("http://192.168.1.3:5000");
+        //    string jsondata = JsonConvert.SerializeObject(value);
+        //    var content = new StringContent(jsondata, Encoding.UTF8, "application/json");
+        //    HttpResponseMessage response = await client.PostAsync("/analyzegraphdata", content);
+        //    var json = await response.Content.ReadAsStringAsync();
+        //    var regressionDataCollection = JsonConvert.DeserializeObject<RegressioDetailsViewModel>(json);
+        //    Debug.WriteLine("regression data deserialized");
+        //    var graphDataCollection = JsonConvert.DeserializeObject<graphDataViewModel>(json);
+
+        //    regression.Text = regressionDataCollection.RegressionDetails.ElementAt(0).equation;
+        //    polyregression.Text = regressionDataCollection.RegressionDetails.ElementAt(0).PolyEquation;
+
+        //    ScatterSeries scatterSeries = new ScatterSeries()
+        //    {
+        //        ItemsSource = graphDataCollection.GraphData,
+        //        XBindingPath = "Chartx",
+        //        YBindingPath = "Scattery",
+        //        EnableAnimation = true,
+        //        Color = Color.Orange,
+        //    };
+        //    mainchart1.Series.Add(scatterSeries);
+
+        //    SplineSeries splineSeriesreg = new SplineSeries()
+        //    {
+        //        ItemsSource = graphDataCollection.GraphData,
+        //        XBindingPath = "Chartx",
+        //        YBindingPath = "Regressiony",
+        //        Color = Color.Blue,
+        //        EnableAnimation = true
+        //    };
+
+        //    mainchart1.Series.Add(splineSeriesreg);
+
+        //    SplineSeries polysplineSeries = new SplineSeries()
+        //    {
+        //        ItemsSource = graphDataCollection.GraphData,
+        //        XBindingPath = "Chartx",
+        //        YBindingPath = "PolyRegressiony",
+        //        Color = Color.LightBlue,
+        //        EnableAnimation = true
+        //    };
+
+        //    mainchart1.Series.Add(polysplineSeries);
+        //}
+
+        //async private void fly_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    mainchart2.Series.Clear();
+
+        //    List<Dictionary<string, string>> portfoliojson = new List<Dictionary<string, string>>();
+        //    Dictionary<string, string> temp = new Dictionary<string, string>();
+
+        //    temp.Add("Qty", portfolioContractsQty[0].ToString());
+        //    temp.Add("contract", portfolioContracts[0].ToString());
+
+        //    portfoliojson.Add(temp);
+
+        //    Dictionary<string, string> temp1 = new Dictionary<string, string>();
+
+        //    temp1.Add("Qty", portfolioContractsQty[1].ToString());
+        //    temp1.Add("contract", portfolioContracts[1].ToString());
+
+        //    portfoliojson.Add(temp1);
+        //    //-----------------------------------------------------graph data 2------------------------------------------
+        //    string graphtype0 = null;
+
+        //    if (graphtype2.SelectedItem.ToString() == "Combined vs Outright")
+        //    {
+        //        graphtype0 = "CombinedVsOutright";
+        //    }
+        //    else if (graphtype2.SelectedItem.ToString() == "Fly vs Fly Regression")
+        //    {
+        //        graphtype0 = "flyRegressionPoly";
+        //    }
+        //    else if (graphtype2.SelectedItem.ToString() == "Fly vs Average Outright")
+        //    {
+        //        graphtype0 = "FlyVsAvgOutright";
+        //    }
+        //    else if (graphtype2.SelectedItem.ToString() == "Fly vs Outright")
+        //    {
+        //        graphtype0 = "FlyVsOutright";
+        //    }
+        //    var value1 = new AnalyzeDataPostJson()
+        //    {
+        //        asOnDate = asOnDate.Date.ToString("yyyy-MM-dd"),
+        //        portfolio = portfoliojson,
+        //        lookback = lookbackWindow.SelectedItem.ToString(),
+        //        graphType = graphtype0,
+        //        fly = fly.SelectedItem.ToString()
+        //    };
+
+        //    var client1 = new HttpClient();
+        //    client1.BaseAddress = new Uri("http://192.168.1.3:5000");
+        //    string jsondata1 = JsonConvert.SerializeObject(value1);
+        //    var content1 = new StringContent(jsondata1, Encoding.UTF8, "application/json");
+        //    HttpResponseMessage response1 = await client1.PostAsync("/analyzegraphdata", content1);
+        //    var json1 = await response1.Content.ReadAsStringAsync();
+        //    var regressionDataCollection1 = JsonConvert.DeserializeObject<RegressioDetailsViewModel>(json1);
+        //    Debug.WriteLine("regression data deserialized");
+        //    var graphDataCollection1 = JsonConvert.DeserializeObject<graphDataViewModel>(json1);
+
+        //    regression1.Text = regressionDataCollection1.RegressionDetails.ElementAt(0).equation;
+        //    polyregression1.Text = regressionDataCollection1.RegressionDetails.ElementAt(0).PolyEquation;
+
+        //    ScatterSeries scatterSeries1 = new ScatterSeries()
+        //    {
+        //        ItemsSource = graphDataCollection1.GraphData,
+        //        XBindingPath = "Chartx",
+        //        YBindingPath = "Scattery",
+        //        EnableAnimation = true,
+        //        Color = Color.Orange,
+        //    };
+        //    mainchart2.Series.Add(scatterSeries1);
+
+        //    SplineSeries splineSeriesreg1 = new SplineSeries()
+        //    {
+        //        ItemsSource = graphDataCollection1.GraphData,
+        //        XBindingPath = "Chartx",
+        //        YBindingPath = "Regressiony",
+        //        Color = Color.Blue,
+        //        EnableAnimation = true
+        //    };
+
+        //    mainchart2.Series.Add(splineSeriesreg1);
+
+        //    SplineSeries polysplineSeries1 = new SplineSeries()
+        //    {
+        //        ItemsSource = graphDataCollection1.GraphData,
+        //        XBindingPath = "Chartx",
+        //        YBindingPath = "PolyRegressiony",
+        //        Color = Color.LightBlue,
+        //        EnableAnimation = true
+        //    };
+
+        //    mainchart2.Series.Add(polysplineSeries1);
+        //}
+
+        //async private void graphtype2_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    mainchart2.Series.Clear();
+
+        //    List<Dictionary<string, string>> portfoliojson = new List<Dictionary<string, string>>();
+        //    Dictionary<string, string> temp = new Dictionary<string, string>();
+
+        //    temp.Add("Qty", portfolioContractsQty[0].ToString());
+        //    temp.Add("contract", portfolioContracts[0].ToString());
+
+        //    portfoliojson.Add(temp);
+
+        //    Dictionary<string, string> temp1 = new Dictionary<string, string>();
+
+        //    temp1.Add("Qty", portfolioContractsQty[1].ToString());
+        //    temp1.Add("contract", portfolioContracts[1].ToString());
+
+        //    portfoliojson.Add(temp1);
+        //    //-----------------------------------------------------graph data 2------------------------------------------
+        //    string graphtype0 = null;
+
+        //    if (graphtype2.SelectedItem.ToString() == "Combined vs Outright")
+        //    {
+        //        graphtype0 = "CombinedVsOutright";
+        //    }
+        //    else if (graphtype2.SelectedItem.ToString() == "Fly vs Fly Regression")
+        //    {
+        //        graphtype0 = "flyRegressionPoly";
+        //    }
+        //    else if (graphtype2.SelectedItem.ToString() == "Fly vs Average Outright")
+        //    {
+        //        graphtype0 = "FlyVsAvgOutright";
+        //    }
+        //    else if (graphtype2.SelectedItem.ToString() == "Fly vs Outright")
+        //    {
+        //        graphtype0 = "FlyVsOutright";
+        //    }
+        //    var value1 = new AnalyzeDataPostJson()
+        //    {
+        //        asOnDate = asOnDate.Date.ToString("yyyy-MM-dd"),
+        //        portfolio = portfoliojson,
+        //        lookback = lookbackWindow.SelectedItem.ToString(),
+        //        graphType = graphtype0,
+        //        fly = fly.SelectedItem.ToString()
+        //    };
+
+        //    var client1 = new HttpClient();
+        //    client1.BaseAddress = new Uri("http://192.168.1.3:5000");
+        //    string jsondata1 = JsonConvert.SerializeObject(value1);
+        //    var content1 = new StringContent(jsondata1, Encoding.UTF8, "application/json");
+        //    HttpResponseMessage response1 = await client1.PostAsync("/analyzegraphdata", content1);
+        //    var json1 = await response1.Content.ReadAsStringAsync();
+        //    var regressionDataCollection1 = JsonConvert.DeserializeObject<RegressioDetailsViewModel>(json1);
+        //    Debug.WriteLine("regression data deserialized");
+        //    var graphDataCollection1 = JsonConvert.DeserializeObject<graphDataViewModel>(json1);
+
+        //    regression1.Text = regressionDataCollection1.RegressionDetails.ElementAt(0).equation;
+        //    polyregression1.Text = regressionDataCollection1.RegressionDetails.ElementAt(0).PolyEquation;
+
+        //    ScatterSeries scatterSeries1 = new ScatterSeries()
+        //    {
+        //        ItemsSource = graphDataCollection1.GraphData,
+        //        XBindingPath = "Chartx",
+        //        YBindingPath = "Scattery",
+        //        EnableAnimation = true,
+        //        Color = Color.Orange,
+        //    };
+        //    mainchart2.Series.Add(scatterSeries1);
+
+        //    SplineSeries splineSeriesreg1 = new SplineSeries()
+        //    {
+        //        ItemsSource = graphDataCollection1.GraphData,
+        //        XBindingPath = "Chartx",
+        //        YBindingPath = "Regressiony",
+        //        Color = Color.Blue,
+        //        EnableAnimation = true
+        //    };
+
+        //    mainchart2.Series.Add(splineSeriesreg1);
+
+        //    SplineSeries polysplineSeries1 = new SplineSeries()
+        //    {
+        //        ItemsSource = graphDataCollection1.GraphData,
+        //        XBindingPath = "Chartx",
+        //        YBindingPath = "PolyRegressiony",
+        //        Color = Color.LightBlue,
+        //        EnableAnimation = true
+        //    };
+
+        //    mainchart2.Series.Add(polysplineSeries1);
+        //}
     }
 }

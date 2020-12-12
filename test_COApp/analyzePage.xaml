@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="test_COApp.analyzePage">
     <ScrollView>
@@ -21,7 +22,7 @@
                         BackgroundColor="LawnGreen" Clicked="Add_Button_Clicked"
                         Grid.Row="3" Grid.Column="0"/>
                 <Button Text="Reset" TextTransform="None" CornerRadius="20" FontSize="Medium" FontFamily="product" TextColor="White"
-                        BackgroundColor="Red"
+                        BackgroundColor="Red" Clicked="Reset_Button_Clicked"
                         Grid.Row="3" Grid.Column="1"/>
                 <Label x:Name="portfolioEquation" FontSize="Medium" FontFamily="product" TextColor="#01aef1"
                        Grid.Row="4" Grid.ColumnSpan="2"/>
@@ -29,10 +30,50 @@
                         BackgroundColor="#01aef1" Margin="120, 0, 120, 0" Clicked="Analyze_Button_Clicked"
                         Grid.Row="5" Grid.ColumnSpan="2"/>
             </Grid>
-            <Picker x:Name="graphtype1" FontFamily="product" FontSize="Medium" TextColor="Black"/>
+            <Picker x:Name="graphtype1" FontFamily="product" FontSize="Medium" TextColor="Black" SelectedIndexChanged="Analyze_Button_Clicked"/>
 
-            <Picker x:Name="fly" FontFamily="product" FontSize="Medium" TextColor="Black"/>
-            <Picker x:Name="graphtype2" FontFamily="product" FontSize="Medium" TextColor="Black"/>
+            <Label x:Name="regression" FontSize="Medium" FontFamily="product"/>
+            <Label x:Name="polyregression" FontSize="Medium" FontFamily="product"/>
+
+            <chart:SfChart x:Name="mainchart1" HeightRequest="300">
+                <chart:SfChart.PrimaryAxis>
+                    <chart:NumericalAxis>
+                        <chart:NumericalAxis.Title>
+                            <chart:ChartAxisTitle Text="X Axis" />
+                        </chart:NumericalAxis.Title>
+                    </chart:NumericalAxis>
+                </chart:SfChart.PrimaryAxis>
+                <chart:SfChart.SecondaryAxis>
+                    <chart:NumericalAxis>
+                        <chart:NumericalAxis.Title>
+                            <chart:ChartAxisTitle Text="Y Axis" />
+                        </chart:NumericalAxis.Title>
+                    </chart:NumericalAxis>
+                </chart:SfChart.SecondaryAxis>
+            </chart:SfChart>
+
+            <Picker x:Name="fly" FontFamily="product" FontSize="Medium" TextColor="Black" SelectedIndexChanged="Analyze_Button_Clicked"/>
+            <Picker x:Name="graphtype2" FontFamily="product" FontSize="Medium" TextColor="Black" SelectedIndexChanged="Analyze_Button_Clicked"/>
+
+            <Label x:Name="regression1" FontSize="Medium" FontFamily="product"/>
+            <Label x:Name="polyregression1" FontSize="Medium" FontFamily="product"/>
+
+            <chart:SfChart x:Name="mainchart2" HeightRequest="300">
+                <chart:SfChart.PrimaryAxis>
+                    <chart:NumericalAxis>
+                        <chart:NumericalAxis.Title>
+                            <chart:ChartAxisTitle Text="X Axis" />
+                        </chart:NumericalAxis.Title>
+                    </chart:NumericalAxis>
+                </chart:SfChart.PrimaryAxis>
+                <chart:SfChart.SecondaryAxis>
+                    <chart:NumericalAxis>
+                        <chart:NumericalAxis.Title>
+                            <chart:ChartAxisTitle Text="Y Axis" />
+                        </chart:NumericalAxis.Title>
+                    </chart:NumericalAxis>
+                </chart:SfChart.SecondaryAxis>
+            </chart:SfChart>
             
         </StackLayout>
     </ScrollView>
