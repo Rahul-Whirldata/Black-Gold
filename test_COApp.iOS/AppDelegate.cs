@@ -24,10 +24,10 @@ namespace test_COApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            Xamarin.Forms.Forms.SetFlags("RadioButton_Experimental");
-global::Xamarin.Forms.Forms.Init();
-SfButtonRenderer.Init();
-SfChartRenderer.Init();
+            Xamarin.Forms.Forms.SetFlags(new string[] { "SwipeView_Experimental", "Shapes_Experimental", "AppTheme_Experimental", "Brush_Experimental", "RadioButton_Experimental" });
+            global::Xamarin.Forms.Forms.Init();
+            SfButtonRenderer.Init();
+            SfChartRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
