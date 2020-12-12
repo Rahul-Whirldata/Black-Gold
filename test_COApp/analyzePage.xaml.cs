@@ -120,7 +120,7 @@ namespace test_COApp
                 asOnDate = e.NewDate.ToString("yyyy-MM-dd")
             };
             var client = new HttpClient();
-            client.BaseAddress = new Uri("http://192.168.1.3:5000");
+            client.BaseAddress = new Uri("http://192.168.1.169:5000");
 
             string jsondata = JsonConvert.SerializeObject(selected_date);
             var content = new StringContent(jsondata, Encoding.UTF8, "application/json");
@@ -246,7 +246,7 @@ namespace test_COApp
                 };
 
                 var client = new HttpClient();
-                client.BaseAddress = new Uri("http://192.168.1.3:5000");
+                client.BaseAddress = new Uri("http://192.168.1.169:5000");
                 string jsondata = JsonConvert.SerializeObject(value);
                 var content = new StringContent(jsondata, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await client.PostAsync("/analyzegraphdata", content);
@@ -320,7 +320,7 @@ namespace test_COApp
                 };
                 
                 var client1 = new HttpClient();
-                client1.BaseAddress = new Uri("http://192.168.1.3:5000");
+                client1.BaseAddress = new Uri("http://192.168.1.169:5000");
                 string jsondata1 = JsonConvert.SerializeObject(value1);
                 var content1 = new StringContent(jsondata1, Encoding.UTF8, "application/json");
                 HttpResponseMessage response1 = await client1.PostAsync("/analyzegraphdata", content1);
@@ -452,7 +452,7 @@ namespace test_COApp
         //    };
 
         //    var client = new HttpClient();
-        //    client.BaseAddress = new Uri("http://192.168.1.3:5000");
+        //    client.BaseAddress = new Uri("http://192.168.1.169:5000");
         //    string jsondata = JsonConvert.SerializeObject(value);
         //    var content = new StringContent(jsondata, Encoding.UTF8, "application/json");
         //    HttpResponseMessage response = await client.PostAsync("/analyzegraphdata", content);
@@ -544,7 +544,7 @@ namespace test_COApp
         //    };
 
         //    var client1 = new HttpClient();
-        //    client1.BaseAddress = new Uri("http://192.168.1.3:5000");
+        //    client1.BaseAddress = new Uri("http://192.168.1.169:5000");
         //    string jsondata1 = JsonConvert.SerializeObject(value1);
         //    var content1 = new StringContent(jsondata1, Encoding.UTF8, "application/json");
         //    HttpResponseMessage response1 = await client1.PostAsync("/analyzegraphdata", content1);
@@ -636,7 +636,7 @@ namespace test_COApp
         //    };
 
         //    var client1 = new HttpClient();
-        //    client1.BaseAddress = new Uri("http://192.168.1.3:5000");
+        //    client1.BaseAddress = new Uri("http://192.168.1.169:5000");
         //    string jsondata1 = JsonConvert.SerializeObject(value1);
         //    var content1 = new StringContent(jsondata1, Encoding.UTF8, "application/json");
         //    HttpResponseMessage response1 = await client1.PostAsync("/analyzegraphdata", content1);
