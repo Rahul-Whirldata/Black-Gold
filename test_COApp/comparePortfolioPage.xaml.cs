@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace test_COApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class comparePortfolioPage : ContentPage
+    public partial class comparePortfolioPage : TabbedPage
     {
         public comparePortfolioPage()
         {

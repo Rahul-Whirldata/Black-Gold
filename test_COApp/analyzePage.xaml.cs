@@ -42,11 +42,6 @@ namespace test_COApp
     {
         public ObservableCollection<graphData> GraphData { get; set; }
     }
-    public class portfolioData
-    {
-        public string Qty { get; set; }
-        public string contract { get; set; }
-    }
     public class AnalyzeDataPostJson
     {
         public string asOnDate { get; set; }
@@ -124,6 +119,7 @@ namespace test_COApp
 
             string jsondata = JsonConvert.SerializeObject(selected_date);
             var content = new StringContent(jsondata, Encoding.UTF8, "application/json");
+             
 
             HttpResponseMessage response = await client.PostAsync("/activeflylist", content);
 
@@ -249,6 +245,8 @@ namespace test_COApp
                 client.BaseAddress = new Uri("http://ec2-3-94-188-74.compute-1.amazonaws.com:5000");
                 string jsondata = JsonConvert.SerializeObject(value);
                 var content = new StringContent(jsondata, Encoding.UTF8, "application/json");
+                 
+
                 HttpResponseMessage response = await client.PostAsync("/analyzegraphdata", content);
                 var json = await response.Content.ReadAsStringAsync();
                 var regressionDataCollection = JsonConvert.DeserializeObject<RegressioDetailsViewModel>(json);

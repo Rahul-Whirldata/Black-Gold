@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="test_COApp.analyzePage">
+             x:Class="test_COApp.portfolioOnePage">
     <ScrollView>
         <StackLayout Margin="5">
             <Grid Padding="20" Margin="0, 10, 0, 10">
-                <Label Text="Lookback Window" TextColor="Black" FontFamily="product"
+                <Label Text="Lookback Window" TextColor="Black" FontFamily="product" VerticalTextAlignment="Center"
                        Grid.Row="0" Grid.Column="0"/>
-                <Picker x:Name="lookbackWindow" FontFamily="product"
+                <Picker x:Name="lookbackWindow" FontFamily="product" 
                         Grid.Row="0" Grid.Column="1"/>
-                <Label Text="As on Date" TextColor="Black" FontFamily="product"
+                <Label Text="As on Date" TextColor="Black" FontFamily="product"  VerticalTextAlignment="Center"
                        Grid.Row="1" Grid.Column="0"/>
                 <DatePicker x:Name="asOnDate" FontFamily="product" Format="d" DateSelected="asOnDate_DateSelected"
                             Grid.Row="1" Grid.Column="1"/>
@@ -18,26 +18,32 @@
                         Grid.Row="2" Grid.Column="0"/>
                 <Picker x:Name="buySell" FontFamily="product" TextColor="Black"
                         Grid.Row="2" Grid.Column="1"/>
-                <Button Text="Add" TextTransform="None" CornerRadius="20" FontFamily="product" TextColor="white"
-                        BackgroundColor="LawnGreen" Clicked="Add_Button_Clicked" 
-                        Grid.Row="3" Grid.Column="0"/>
-                <Button Text="Reset" TextTransform="None" CornerRadius="20" FontFamily="product" TextColor="White"
-                        BackgroundColor="Red" Clicked="Reset_Button_Clicked" 
+                <Label Text="Quantity" TextColor="Black" FontFamily="product" VerticalTextAlignment="Center"
+                       Grid.Row="3" Grid.Column="0"/>
+                <Stepper x:Name="qty" Minimum="1" Maximum="5"
                         Grid.Row="3" Grid.Column="1"/>
+                <Label Text="{Binding Source={x:Reference qty}, Path=Value}" TextColor="Black" FontFamily="product" HorizontalTextAlignment="Center"
+                       Grid.Row="4" Grid.Column="1"/>
+                <Button Text="Add" TextTransform="None" CornerRadius="20" FontFamily="product" TextColor="white"
+                        BackgroundColor="LawnGreen" Clicked="Add_Button_Clicked"
+                        Grid.Row="5" Grid.Column="0"/>
+                <Button Text="Reset" TextTransform="None" CornerRadius="20" FontFamily="product" TextColor="White"
+                        BackgroundColor="Red" Clicked="Reset_Button_Clicked"
+                        Grid.Row="5" Grid.Column="1"/>
                 <Label x:Name="portfolioEquation" FontFamily="product" TextColor="#01aef1"
-                       Grid.Row="4" Grid.ColumnSpan="2"/>
+                       Grid.Row="6" Grid.ColumnSpan="2"/>
                 <Button Text="Analyze" TextTransform="None" CornerRadius="20" FontFamily="product" TextColor="White"
-                        BackgroundColor="#01aef1" HorizontalOptions="CenterAndExpand" Clicked="Analyze_Button_Clicked"
-                        Grid.Row="5" Grid.ColumnSpan="2"/>
+                        BackgroundColor="#01aef1" Margin="120, 0, 120, 0" Clicked="Analyze_Button_Clicked" x:Name="analyzeButton"
+                        Grid.Row="7" Grid.ColumnSpan="2"/>
             </Grid>
-            <Picker x:Name="graphtype1" FontFamily="product" TextColor="Black" SelectedIndexChanged="Analyze_Button_Clicked"/>
+            <Picker x:Name="graphtype" FontFamily="product" TextColor="Black" SelectedIndexChanged="Analyze_Button_Clicked"/>
 
             <Label x:Name="regression" FontSize="Small"  FontFamily="product" TextColor="Blue"/>
             <Label x:Name="polyregression" FontSize="Small" FontFamily="product" TextColor="LightBlue"/>
             <Label x:Name="r2regression" FontSize="Small"  FontFamily="product" TextColor="Blue"/>
             <Label x:Name="r2polyregression" FontSize="Small" FontFamily="product" TextColor="LightBlue"/>
 
-            <chart:SfChart x:Name="mainchart1" HeightRequest="300">
+            <chart:SfChart x:Name="mainchart" HeightRequest="300">
                 <chart:SfChart.PrimaryAxis>
                     <chart:NumericalAxis>
                         <chart:NumericalAxis.Title>
@@ -54,31 +60,6 @@
                 </chart:SfChart.SecondaryAxis>
             </chart:SfChart>
 
-            <Picker x:Name="fly" FontFamily="product" TextColor="Black" SelectedIndexChanged="Analyze_Button_Clicked"/>
-            <Picker x:Name="graphtype2" FontFamily="product" TextColor="Black" SelectedIndexChanged="Analyze_Button_Clicked"/>
-
-            <Label x:Name="regression1" FontSize="Small"  FontFamily="product" TextColor="Blue"/>
-            <Label x:Name="polyregression1" FontSize="Small" FontFamily="product" TextColor="LightBlue"/>
-            <Label x:Name="r2regression1" FontSize="Small"  FontFamily="product" TextColor="Blue"/>
-            <Label x:Name="r2polyregression1" FontSize="Small" FontFamily="product" TextColor="LightBlue"/>
-
-            <chart:SfChart x:Name="mainchart2" HeightRequest="300">
-                <chart:SfChart.PrimaryAxis>
-                    <chart:NumericalAxis>
-                        <chart:NumericalAxis.Title>
-                            <chart:ChartAxisTitle Text="X Axis" />
-                        </chart:NumericalAxis.Title>
-                    </chart:NumericalAxis>
-                </chart:SfChart.PrimaryAxis>
-                <chart:SfChart.SecondaryAxis>
-                    <chart:NumericalAxis>
-                        <chart:NumericalAxis.Title>
-                            <chart:ChartAxisTitle Text="Y Axis" />
-                        </chart:NumericalAxis.Title>
-                    </chart:NumericalAxis>
-                </chart:SfChart.SecondaryAxis>
-            </chart:SfChart>
-            
         </StackLayout>
     </ScrollView>
 </ContentPage>

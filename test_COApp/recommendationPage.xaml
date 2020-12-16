@@ -1,12 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:datagrid="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="test_COApp.recommendationPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+    <ScrollView>
+        <StackLayout Margin="5">
+            <Grid>
+                <Label Text="Recommendations for :"  TextColor="Black" FontFamily="product" VerticalTextAlignment="Center"
+                   Grid.Row="0" Grid.Column="0"/>
+                <DatePicker x:Name="recDate" FontFamily="product"  Format="d"
+                        Grid.Row="0" Grid.Column="1"/>
+                <Label Text="Lookback Window"  TextColor="Black" FontFamily="product" VerticalTextAlignment="Center"
+                   Grid.Row="1" Grid.Column="0"/>
+                <Picker x:Name="lookbackWindow" FontFamily="product" 
+                    Grid.Row="1" Grid.Column="1"/>
+                <Button Text="Get Recommendations" TextTransform="None" CornerRadius="20"  FontFamily="product" TextColor="White"
+                    BackgroundColor="#01aef1" Margin="100, 0, 100, 0" x:Name="recButton" Clicked="recButton_Clicked"
+                    Grid.Row="2" Grid.ColumnSpan="2"/>
+            </Grid>
+
+            <Label Text="Fly"  TextColor="Black" FontFamily="product"/>
+            <datagrid:SfDataGrid x:Name="flyTable" AllowDraggingColumn="True"
+                                 AllowGroupExpandCollapse="True"
+                                 AllowSorting="True"
+                                 ColumnSizer="Star"
+                                 AutoGenerateColumns="True">
+                <datagrid:SfDataGrid.Columns>
+                    <datagrid:GridTextColumn MappingName="FlyMonth" HeaderText="Fly Month" IsHidden="True"/>
+                </datagrid:SfDataGrid.Columns>
+                <datagrid:SfDataGrid.GroupColumnDescriptions>
+                    <datagrid:GroupColumnDescription x:Name="groupFly" ColumnName="FlyMonth"/>
+                </datagrid:SfDataGrid.GroupColumnDescriptions>
+            </datagrid:SfDataGrid>
+
+            <Label Text="Double Fly"  TextColor="Black" FontFamily="product"/>
+            <datagrid:SfDataGrid x:Name="DflyTable" AllowDraggingColumn="True"
+                                 AllowGroupExpandCollapse="True"
+                                 AllowSorting="True"
+                                 ColumnSizer="Star"
+                                 AutoGenerateColumns="True">
+                <datagrid:SfDataGrid.Columns>
+                    <datagrid:GridTextColumn MappingName="Month" HeaderText="Month" IsHidden="True" />
+                </datagrid:SfDataGrid.Columns>
+                <datagrid:SfDataGrid.GroupColumnDescriptions>
+                    <datagrid:GroupColumnDescription x:Name="groupDFly" ColumnName="Month"/>
+                </datagrid:SfDataGrid.GroupColumnDescriptions>
+            </datagrid:SfDataGrid>
+
+
         </StackLayout>
-    </ContentPage.Content>
+    </ScrollView>
 </ContentPage>

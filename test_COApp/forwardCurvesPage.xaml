@@ -10,16 +10,10 @@
             <Grid Padding="20"
           Margin="0, 10, 0, 10">
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
-
-                <Label Text="Date" Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product" FontSize="Medium" TextColor="Black"/>
+                
+                <Label Text="Date" Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product" TextColor="Black"/>
                 <DatePicker x:Name="base_date" Grid.Row="0" Grid.Column="1" FontFamily="product" DateSelected="base_date_DateChanged" Format="d"/>
-                <Label Text="Look Forward Period" Grid.Row="1" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product" FontSize="Medium" TextColor="Black"/>
+                <Label Text="Look Forward Period" Grid.Row="1" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product" TextColor="Black"/>
                 <Stepper x:Name="LookForward" Grid.Row="1" Grid.Column="1"
                          Maximum="5"
                          Minimum="1"
@@ -31,10 +25,11 @@
                    Grid.Column="1"
                    FontSize="Medium"
                    TextColor="Black"/>
-                <Label Text="Compare Date" Grid.Row="3" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product" FontSize="Medium" TextColor="Black"/>
+                <Label Text="Compare Date" Grid.Row="3" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product" TextColor="Black"/>
                 <DatePicker x:Name="compare_dates" Grid.Row="3" Grid.Column="1" FontFamily="product" DateSelected="compare_dates_DateSelected"/>
 
             </Grid>
+            
             <ListView x:Name="compareDateListView" 
                       ItemTapped="compareDateListView_ItemTapped"
                       HasUnevenRows="True" HeightRequest="180">
@@ -50,11 +45,12 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            
             <Picker x:Name="picker1" SelectedIndexChanged="picker1_SelectedIndexChanged"
-                    FontFamily="product"/>
+                FontFamily="product"/>
             <Picker x:Name="pickerNum1" SelectedIndexChanged="picker1_SelectedIndexChanged"
-                    FontFamily="product"/>
-
+                FontFamily="product"/>
+            
             <chart:SfChart HeightRequest="250" x:Name="mainChart1">
                 <chart:SfChart.PrimaryAxis>
                     <chart:CategoryAxis LabelRotationAngle="90">

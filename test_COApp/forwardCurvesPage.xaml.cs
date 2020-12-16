@@ -55,6 +55,7 @@ namespace test_COApp
 
             string jsondata = JsonConvert.SerializeObject(values);
             var content = new StringContent(jsondata, Encoding.UTF8, "application/json");
+             
 
             Debug.WriteLine("content before sending api call -----> "+content);
             
@@ -180,7 +181,7 @@ namespace test_COApp
             pick2.Add("Spread");
             pick2.Add("Fly");
             picker2.ItemsSource = pick2;
-            picker2.SelectedIndex = 0;
+            picker2.SelectedIndex = 1;
 
             var picknum2 = new List<string>();
             picknum2.Add("1");
