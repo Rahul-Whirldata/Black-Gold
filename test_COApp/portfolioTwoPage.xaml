@@ -33,7 +33,7 @@
                 <Label x:Name="portfolioEquation"  FontFamily="product" TextColor="#01aef1" VerticalTextAlignment="Center"
                        Grid.Row="6" Grid.ColumnSpan="2"/>
                 <Button Text="Analyze" TextTransform="None" CornerRadius="20"  FontFamily="product" TextColor="White"
-                        BackgroundColor="#01aef1" Margin="120, 0, 120, 0" Clicked="Analyze_Button_Clicked" x:Name="analyzeButton"
+                        BackgroundColor="#01aef1" HorizontalOptions="CenterAndExpand" Clicked="Analyze_Button_Clicked" x:Name="analyzeButton"
                         Grid.Row="7" Grid.ColumnSpan="2"/>
             </Grid>
             <Picker x:Name="graphtype" FontFamily="product"  TextColor="Black" SelectedIndexChanged="Analyze_Button_Clicked"/>

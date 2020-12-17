@@ -13,29 +13,27 @@
         </LinearGradientBrush>
     </ContentPage.Background>
     
-    <StackLayout VerticalOptions="Center">
+    <StackLayout VerticalOptions="Center" Margin="25">
 
         <Entry Placeholder="Username" 
-               Margin="50, 40, 50, 10" 
                FontFamily="product"
                PlaceholderColor="White"
                TextColor="White"
-               FontSize="Large"/>
+               FontSize="Medium"/>
         
         <Entry Placeholder="Password" 
-               IsPassword="True" 
-               Margin="50, 10, 50, 10" 
+               IsPassword="True"  
                FontFamily="product"
                PlaceholderColor="White"
                TextColor="White"
-               FontSize="Large"/>
+               FontSize="Medium"/>
         
         <Button Text="Login" TextTransform="None" 
-                Margin="120, 20, 120, 10"
                 CornerRadius="20"
+                HorizontalOptions="CenterAndExpand"
                 Clicked="Button_Clicked"
                 FontFamily="product"
-                FontSize="Large"
+                FontSize="Medium"
                 TextColor="White"
                 BackgroundColor="Transparent"
                 BorderWidth="5"

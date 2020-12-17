@@ -19,23 +19,25 @@
         <Button Text="Login" TextTransform="None" 
                 CornerRadius="20"
                 Clicked="Button_Clicked_login"
-                Margin = "120, 50, 120, 20"
-                FontSize="Large"
+                FontSize="Medium"
                 FontFamily="product"
                 TextColor="White"
                 BorderWidth="5"
                 BorderColor="#01aef1"
-                BackgroundColor="Transparent"/>
+                BackgroundColor="Transparent"
+                Padding="15"
+                Margin="25"/>
         <Button Text="Register" TextTransform="None" 
                 CornerRadius="20"
                 Clicked="Button_Clicked_register"
-                Margin="120, 10, 120, 10"
-                FontSize="Large"
+                FontSize="Medium"
                 FontFamily="product"
                 TextColor="White"
                 BackgroundColor="Transparent"
                 BorderWidth="5"
-                BorderColor="#01aef1"/>
+                BorderColor="#01aef1"
+                Padding="15"
+                Margin="25, 0, 25, 0"/>
 
     </StackLayout>
 </ContentPage>
