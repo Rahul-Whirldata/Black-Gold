@@ -2,19 +2,21 @@
   "images": [
     {
       "appearances": [],
+      "scale": "1x",
+      "idiom": "universal",
+      "filename": "Recommendation.png"
+    },
+    {
+      "appearances": [],
       "scale": "2x",
-      "idiom": "universal"
+      "idiom": "universal",
+      "filename": "Recommendation@2x.png"
     },
     {
       "appearances": [],
       "scale": "3x",
-      "idiom": "universal"
-    },
-    {
-      "appearances": [],
-      "scale": "1x",
       "idiom": "universal",
-      "filename": "Recommendation.png"
+      "filename": "Recommendation@3x.png"
     }
   ],
   "properties": {},

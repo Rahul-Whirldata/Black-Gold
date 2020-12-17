@@ -41,14 +41,14 @@
                 <chart:SfChart.PrimaryAxis>
                     <chart:NumericalAxis>
                         <chart:NumericalAxis.Title>
-                            <chart:ChartAxisTitle Text="X Axis" />
+                            <chart:ChartAxisTitle x:Name="xaxis1" Text="Fly"/>
                         </chart:NumericalAxis.Title>
                     </chart:NumericalAxis>
                 </chart:SfChart.PrimaryAxis>
                 <chart:SfChart.SecondaryAxis>
                     <chart:NumericalAxis>
                         <chart:NumericalAxis.Title>
-                            <chart:ChartAxisTitle Text="Y Axis" />
+                            <chart:ChartAxisTitle x:Name="yaxis1" Text="Combined"/>
                         </chart:NumericalAxis.Title>
                     </chart:NumericalAxis>
                 </chart:SfChart.SecondaryAxis>
@@ -66,14 +66,14 @@
                 <chart:SfChart.PrimaryAxis>
                     <chart:NumericalAxis>
                         <chart:NumericalAxis.Title>
-                            <chart:ChartAxisTitle Text="X Axis" />
+                            <chart:ChartAxisTitle x:Name="xaxis2" Text="Avg"/>
                         </chart:NumericalAxis.Title>
                     </chart:NumericalAxis>
                 </chart:SfChart.PrimaryAxis>
                 <chart:SfChart.SecondaryAxis>
                     <chart:NumericalAxis>
                         <chart:NumericalAxis.Title>
-                            <chart:ChartAxisTitle Text="Y Axis" />
+                            <chart:ChartAxisTitle x:Name="yaxis2" Text="Fly"/>
                         </chart:NumericalAxis.Title>
                     </chart:NumericalAxis>
                 </chart:SfChart.SecondaryAxis>
