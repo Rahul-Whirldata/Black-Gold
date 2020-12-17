@@ -109,7 +109,7 @@
     <ImageAsset Include="Assets.xcassets\mainlogo.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\mainlogo.imageset\logo.png">
+    <ImageAsset Include="Assets.xcassets\mainlogo.imageset\mainlogo.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\Recommendation.imageset\Contents.json">
