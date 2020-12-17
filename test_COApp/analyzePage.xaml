@@ -5,12 +5,12 @@
              x:Class="test_COApp.analyzePage">
     <ScrollView>
         <StackLayout Margin="5">
-            <Grid Padding="20" Margin="0, 10, 0, 10">
-                <Label Text="Lookback Window" TextColor="Black" FontFamily="product"
+            <Grid>
+                <Label Text="Lookback Window" TextColor="Black" FontFamily="product" VerticalTextAlignment="Center"
                        Grid.Row="0" Grid.Column="0"/>
                 <Picker x:Name="lookbackWindow" FontFamily="product"
                         Grid.Row="0" Grid.Column="1"/>
-                <Label Text="As on Date" TextColor="Black" FontFamily="product"
+                <Label Text="As on Date" TextColor="Black" FontFamily="product" VerticalTextAlignment="Center"
                        Grid.Row="1" Grid.Column="0"/>
                 <DatePicker x:Name="asOnDate" FontFamily="product" Format="d" DateSelected="asOnDate_DateSelected"
                             Grid.Row="1" Grid.Column="1"/>
@@ -24,7 +24,7 @@
                 <Button Text="Reset" TextTransform="None" CornerRadius="20" FontFamily="product" TextColor="White"
                         BackgroundColor="Red" Clicked="Reset_Button_Clicked" 
                         Grid.Row="3" Grid.Column="1"/>
-                <Label x:Name="portfolioEquation" FontFamily="product" TextColor="#01aef1"
+                <Label x:Name="portfolioEquation" FontFamily="product" TextColor="#01aef1" VerticalTextAlignment="Center"
                        Grid.Row="4" Grid.ColumnSpan="2"/>
                 <Button Text="Analyze" TextTransform="None" CornerRadius="20" FontFamily="product" TextColor="White"
                         BackgroundColor="#01aef1" HorizontalOptions="CenterAndExpand" Clicked="Analyze_Button_Clicked"

@@ -5,7 +5,8 @@
             x:Class="test_COApp.comparePortfolioPage"
             NavigationPage.HasNavigationBar="False"
             BackgroundColor="White"
-            BarBackgroundColor="#ff669a">
+            BarBackgroundColor="#ff669a"
+            BarTextColor="Black">
 
     <local:portfolioOnePage Title="Portfolio 1" BackgroundColor="White"/>
     <local:portfolioTwoPage Title="Portfolio 2" BackgroundColor="White"/>

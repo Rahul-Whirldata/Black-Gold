@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="test_COApp.recommendationPage">
     <ScrollView>
-        <StackLayout Margin="5">
+        <StackLayout Padding="15">
             <Grid>
                 <Label Text="Recommendations for :"  TextColor="Black" FontFamily="product" VerticalTextAlignment="Center"
                    Grid.Row="0" Grid.Column="0"/>
@@ -15,7 +15,7 @@
                 <Picker x:Name="lookbackWindow" FontFamily="product" 
                     Grid.Row="1" Grid.Column="1"/>
                 <Button Text="Get Recommendations" TextTransform="None" CornerRadius="20"  FontFamily="product" TextColor="White"
-                    BackgroundColor="#01aef1" Margin="100, 0, 100, 0" x:Name="recButton" Clicked="recButton_Clicked"
+                    BackgroundColor="#01aef1" HorizontalOptions="CenterAndExpand" x:Name="recButton" Clicked="recButton_Clicked"
                     Grid.Row="2" Grid.ColumnSpan="2"/>
             </Grid>
 

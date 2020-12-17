@@ -7,10 +7,9 @@
     
     <ScrollView>
         <StackLayout Margin="5">
-            <Grid Padding="20"
-          Margin="0, 10, 0, 10">
+            <Grid>
 
-                
+
                 <Label Text="Date" Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product" TextColor="Black"/>
                 <DatePicker x:Name="base_date" Grid.Row="0" Grid.Column="1" FontFamily="product" DateSelected="base_date_DateChanged" Format="d"/>
                 <Label Text="Look Forward Period" Grid.Row="1" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product" TextColor="Black"/>
@@ -18,18 +17,19 @@
                          Maximum="5"
                          Minimum="1"
                          ValueChanged="LookForward_ValueChanged"/>
-                
+
                 <Label Text="{Binding Source={x:Reference LookForward}, Path=Value}"
                    FontFamily="product"
                    Grid.Row="2"
                    Grid.Column="1"
                    FontSize="Medium"
-                   TextColor="Black"/>
+                   TextColor="Black"
+                       HorizontalTextAlignment="Center"/>
                 <Label Text="Compare Date" Grid.Row="3" Grid.Column="0" VerticalTextAlignment="Center" FontFamily="product" TextColor="Black"/>
                 <DatePicker x:Name="compare_dates" Grid.Row="3" Grid.Column="1" FontFamily="product" DateSelected="compare_dates_DateSelected"/>
 
             </Grid>
-            
+
             <ListView x:Name="compareDateListView" 
                       ItemTapped="compareDateListView_ItemTapped"
                       HasUnevenRows="True" HeightRequest="180">
@@ -37,15 +37,15 @@
                     <DataTemplate>
                         <ViewCell>
                             <Label Text="{Binding .}"
-                                   TextColor="Black"
-                                   FontSize="Medium"
-                                   FontFamily="product"
-                                   Padding="5"/>
+                                TextColor="#01aef1"
+                                FontSize="Medium"
+                                FontFamily="product"
+                                Padding="5"/>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
+
             <Picker x:Name="picker1" SelectedIndexChanged="picker1_SelectedIndexChanged"
                 FontFamily="product"/>
             <Picker x:Name="pickerNum1" SelectedIndexChanged="picker1_SelectedIndexChanged"
