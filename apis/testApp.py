@@ -295,10 +295,6 @@ def analyzegraphdata():
             data, rsquared, rsquaredPoly, equation, polyEquation, standardError, standardErrorPoly = getPolyRegressionLine(
                 data)
             returnString = {
-                'Labels':[{
-                    "xaxis": firstOutrightFirstFly,
-                    "yaxis": "Combined"
-                }],
                 'RegressionDetails': [{
                     "equation": equation,
                     "PolyEquation": polyEquation,
@@ -363,10 +359,6 @@ def analyzegraphdata():
             data, rsquared, rsquaredPoly, equation, polyEquation, standardError, standardErrorPoly = getPolyRegressionLine(
                 data)
             returnString = {
-                'Labels':[{
-                    "xaxis": secondFly,
-                    "yaxis": firstFly
-                }],
                 'RegressionDetails': [{
                     "equation": equation,
                     "PolyEquation": polyEquation,
@@ -460,10 +452,6 @@ def analyzegraphdata():
             data, rsquared, rsquaredPoly, equation, polyEquation, standardError, standardErrorPoly = getPolyRegressionLine(
                 data)
             returnString = {
-                'Labels':[{
-                    "xaxis": chosenOutright,
-                    "yaxis": selectedFly
-                }],
                 'RegressionDetails': [{
                     "equation": equation,
                     "PolyEquation": polyEquation,
@@ -530,10 +518,6 @@ def analyzegraphdata():
             data, rsquared, rsquaredPoly, equation, polyEquation, standardError, standardErrorPoly = getPolyRegressionLine(
                 data)
             returnString = {
-                'Labels':[{
-                    "xaxis": "Avg",
-                    "yaxis": selectedFly
-                }],
                 'RegressionDetails': [{
                     "equation": equation,
                     "PolyEquation": polyEquation,
@@ -1030,7 +1014,7 @@ def recommendation():
             'month_of_spread', axis=1)
         Fly1M["Value"]  = Fly1M["SDs Aways"].apply(lambda x: filter_value(x))
         Fly1M.dropna(inplace = True)
-        Fly1M["FlyMonth"] = "1"
+        Fly1M["FlyMonth"] = 1
         for i, j in zip(list(Fly1M.columns), tempList):
             Fly1M.rename(columns = {i : j}, inplace = True)
         
@@ -1039,7 +1023,7 @@ def recommendation():
             'month_of_spread', axis=1)
         Fly3M["Value"]  = Fly3M["SDs Aways"].apply(lambda x: filter_value(x))
         Fly3M.dropna(inplace = True)
-        Fly3M["FlyMonth"] = "3"
+        Fly3M["FlyMonth"] = 3
         for i, j in zip(list(Fly3M.columns), tempList):
             Fly3M.rename(columns = {i : j}, inplace = True)
 
@@ -1048,7 +1032,7 @@ def recommendation():
             'month_of_spread', axis=1)
         Fly6M["Value"]  = Fly6M["SDs Aways"].apply(lambda x: filter_value(x))
         Fly6M.dropna(inplace = True)
-        Fly6M["FlyMonth"] = "6"
+        Fly6M["FlyMonth"] = 6
         for i, j in zip(list(Fly6M.columns), tempList):
             Fly6M.rename(columns = {i : j}, inplace = True)
 
@@ -1057,7 +1041,7 @@ def recommendation():
             'month_of_spread', axis=1)
         Fly12M["Value"]  = Fly12M["SDs Aways"].apply(lambda x: filter_value(x))
         Fly12M.dropna(inplace = True)
-        Fly12M["FlyMonth"] = "12"
+        Fly12M["FlyMonth"] = 12
         for i, j in zip(list(Fly12M.columns), tempList):
             Fly12M.rename(columns = {i : j}, inplace = True)
         
@@ -1068,7 +1052,7 @@ def recommendation():
             'month_of_spread', axis=1)
         DFly1M["Value"]  = DFly1M["SDs Aways"].apply(lambda x: filter_value(x))
         DFly1M.dropna(inplace = True)
-        DFly1M["Month"] = "1"
+        DFly1M["Month"] = 1
         for i, j in zip(list(DFly1M.columns), tempList):
             DFly1M.rename(columns = {i : j}, inplace = True)
 
@@ -1077,7 +1061,7 @@ def recommendation():
             'month_of_spread', axis=1)
         DFly3M["Value"]  = DFly3M["SDs Aways"].apply(lambda x: filter_value(x))
         DFly3M.dropna(inplace = True)
-        DFly3M["Month"] = "3"
+        DFly3M["Month"] = 3
         for i, j in zip(list(DFly3M.columns), tempList):
             DFly3M.rename(columns = {i : j}, inplace = True)
 
@@ -1086,7 +1070,7 @@ def recommendation():
             'month_of_spread', axis=1)
         DFly6M["Value"]  = DFly6M["SDs Aways"].apply(lambda x: filter_value(x))
         DFly6M.dropna(inplace = True)
-        DFly6M["Month"] = "6"
+        DFly6M["Month"] = 6
         for i, j in zip(list(DFly6M.columns), tempList):
             DFly6M.rename(columns = {i : j}, inplace = True)
 
@@ -1095,16 +1079,16 @@ def recommendation():
             'month_of_spread', axis=1)
         DFly12M["Value"]  = DFly12M["SDs Aways"].apply(lambda x: filter_value(x))
         DFly12M.dropna(inplace = True)
-        DFly12M["Month"] = "12"
+        DFly12M["Month"] = 12
         for i, j in zip(list(DFly12M.columns), tempList):
             DFly12M.rename(columns = {i : j}, inplace = True)
 
 
-        flyDF = pd.concat([Fly1M, Fly3M, Fly6M, Fly12M])
+        flyDF = pd.concat(["Fly1M", "Fly3M", "Fly6M", "Fly12M"])
         flyDF = flyDF.to_dict('records')
         flyDF = json.dumps(flyDF).replace('"', "'")
 
-        dflyDF = pd.concat([DFly1M, DFly3M, DFly6M, DFly12M])
+        dflyDF = pd.concat(["DFly1M", "DFly3M", "DFly6M", "DFly12M"])
         dflyDF = dflyDF.to_dict('records')
         dflyDF = json.dumps(dflyDF).replace('"', "'")
 
