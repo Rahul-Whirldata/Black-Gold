@@ -19,7 +19,9 @@
       "filename": "comparePorfolio@3x.png"
     }
   ],
-  "properties": {},
+  "properties": {
+    "template-rendering-intent": "original"
+  },
   "info": {
     "version": 1,
     "author": ""

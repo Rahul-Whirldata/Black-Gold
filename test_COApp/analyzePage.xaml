@@ -14,24 +14,23 @@
                        Grid.Row="1" Grid.Column="0"/>
                 <DatePicker x:Name="asOnDate" FontFamily="product" Format="d" DateSelected="asOnDate_DateSelected"
                             Grid.Row="1" Grid.Column="1"/>
-                <Picker x:Name="pickContract" FontFamily="product" TextColor="Black" 
+                <Picker x:Name="pickContract" FontFamily="product" TextColor="Black"
                         Grid.Row="2" Grid.Column="0"/>
                 <Picker x:Name="buySell" FontFamily="product" TextColor="Black"
                         Grid.Row="2" Grid.Column="1"/>
-                <Button Text="Add" TextTransform="None" CornerRadius="20" FontFamily="product" TextColor="white"
-                        BackgroundColor="LawnGreen" Clicked="Add_Button_Clicked" 
+                <Button Text="Add" TextTransform="None" CornerRadius="30" FontFamily="product" TextColor="white" Padding="15"
+                        BackgroundColor="LawnGreen" Clicked="Add_Button_Clicked" FontSize="Medium"
                         Grid.Row="3" Grid.Column="0"/>
-                <Button Text="Reset" TextTransform="None" CornerRadius="20" FontFamily="product" TextColor="White"
-                        BackgroundColor="Red" Clicked="Reset_Button_Clicked" 
+                <Button Text="Reset" TextTransform="None" CornerRadius="30" FontFamily="product" TextColor="White"
+                        BackgroundColor="Red" Clicked="Reset_Button_Clicked" Padding="15" FontSize="Medium"
                         Grid.Row="3" Grid.Column="1"/>
                 <Label x:Name="portfolioEquation" FontFamily="product" TextColor="#01aef1" VerticalTextAlignment="Center"
                        Grid.Row="4" Grid.ColumnSpan="2"/>
-                <Button Text="Analyze" TextTransform="None" CornerRadius="20" FontFamily="product" TextColor="White"
-                        BackgroundColor="#01aef1" HorizontalOptions="CenterAndExpand" Clicked="Analyze_Button_Clicked"
+                <Button Text="Analyze" TextTransform="None" CornerRadius="30" FontFamily="product" TextColor="White" Padding="15" FontSize="Medium"
+                        BackgroundColor="#0081c7" Margin="20, 0, 20, 5" Clicked="Analyze_Button_Clicked"
                         Grid.Row="5" Grid.ColumnSpan="2"/>
             </Grid>
             <Picker x:Name="graphtype1" FontFamily="product" TextColor="Black" SelectedIndexChanged="Analyze_Button_Clicked"/>
-
             <Label x:Name="regression" FontSize="Small"  FontFamily="product" TextColor="Blue"/>
             <Label x:Name="polyregression" FontSize="Small" FontFamily="product" TextColor="LightBlue"/>
             <Label x:Name="r2regression" FontSize="Small"  FontFamily="product" TextColor="Blue"/>

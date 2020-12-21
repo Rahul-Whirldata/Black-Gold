@@ -14,30 +14,26 @@
     </ContentPage.Background>
 
     <StackLayout VerticalOptions="Center">
-        <Image Source="mainlogo" HeightRequest="100"/>
+        <Image Source="mainlogo" HeightRequest="120"/>
 
         <Button Text="Login" TextTransform="None" 
-                CornerRadius="20"
                 Clicked="Button_Clicked_login"
-                FontSize="Medium"
+                FontSize="Large"
                 FontFamily="product"
                 TextColor="White"
-                BorderWidth="5"
-                BorderColor="#01aef1"
-                BackgroundColor="Transparent"
+                BackgroundColor="#0081c7"
                 Padding="15"
-                Margin="25"/>
+                CornerRadius="30"
+                Margin="20, 120, 20, 5"/>
         <Button Text="Register" TextTransform="None" 
-                CornerRadius="20"
                 Clicked="Button_Clicked_register"
-                FontSize="Medium"
+                FontSize="Large"
                 FontFamily="product"
                 TextColor="White"
-                BackgroundColor="Transparent"
-                BorderWidth="5"
-                BorderColor="#01aef1"
+                BackgroundColor="#0081c7"
                 Padding="15"
-                Margin="25, 0, 25, 0"/>
+                CornerRadius="30"
+                Margin="20, 0, 20, 5"/>
 
     </StackLayout>
 </ContentPage>

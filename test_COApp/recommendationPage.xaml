@@ -14,8 +14,8 @@
                    Grid.Row="1" Grid.Column="0"/>
                 <Picker x:Name="lookbackWindow" FontFamily="product" 
                     Grid.Row="1" Grid.Column="1"/>
-                <Button Text="Get Recommendations" TextTransform="None" CornerRadius="20"  FontFamily="product" TextColor="White"
-                    BackgroundColor="#01aef1" HorizontalOptions="CenterAndExpand" x:Name="recButton" Clicked="recButton_Clicked"
+                <Button Text="Get Recommendations" TextTransform="None" CornerRadius="30"  FontFamily="product" TextColor="White"
+                    BackgroundColor="#0081c7" Margin="20, 0, 20, 5" x:Name="recButton" Clicked="recButton_Clicked" Padding="15" FontSize="Medium"
                     Grid.Row="2" Grid.ColumnSpan="2"/>
             </Grid>
 

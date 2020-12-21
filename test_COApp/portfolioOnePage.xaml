@@ -24,17 +24,17 @@
                         Grid.Row="3" Grid.Column="1"/>
                 <Label Text="{Binding Source={x:Reference qty}, Path=Value}" TextColor="Black" FontFamily="product" HorizontalTextAlignment="Center"
                        Grid.Row="4" Grid.Column="1"/>
-                <Button Text="Add" TextTransform="None" CornerRadius="20" FontFamily="product" TextColor="white"
-                        BackgroundColor="LawnGreen" Clicked="Add_Button_Clicked"
+                <Button Text="Add" TextTransform="None" CornerRadius="30" FontFamily="product" TextColor="white"
+                        BackgroundColor="LawnGreen" Clicked="Add_Button_Clicked" Padding="15" FontSize="Medium"
                         Grid.Row="5" Grid.Column="0"/>
-                <Button Text="Reset" TextTransform="None" CornerRadius="20" FontFamily="product" TextColor="White"
-                        BackgroundColor="Red" Clicked="Reset_Button_Clicked"
+                <Button Text="Reset" TextTransform="None" CornerRadius="30" FontFamily="product" TextColor="White"
+                        BackgroundColor="Red" Clicked="Reset_Button_Clicked" Padding="15" FontSize="Medium"
                         Grid.Row="5" Grid.Column="1"/>
                 <Label x:Name="portfolioEquation" FontFamily="product" TextColor="#01aef1" VerticalOptions="Center"
                        Grid.Row="6" Grid.ColumnSpan="2"/>
-                <Button Text="Analyze" TextTransform="None" CornerRadius="20" FontFamily="product" TextColor="White"
-                        BackgroundColor="#01aef1" HorizontalOptions="CenterAndExpand" Clicked="Analyze_Button_Clicked" x:Name="analyzeButton"
-                        Grid.Row="7" Grid.ColumnSpan="2"/>
+                <Button Text="Analyze" TextTransform="None" CornerRadius="30" FontFamily="product" TextColor="White"
+                        BackgroundColor="#0081c7" Margin="20, 0, 20, 5"  Clicked="Analyze_Button_Clicked" x:Name="analyzeButton"
+                        Grid.Row="7" Grid.ColumnSpan="2" Padding="15" FontSize="Medium"/>
             </Grid>
             <Picker x:Name="graphtype" FontFamily="product" TextColor="Black" SelectedIndexChanged="Analyze_Button_Clicked"/>
 

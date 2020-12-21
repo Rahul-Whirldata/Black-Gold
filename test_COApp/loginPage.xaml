@@ -29,15 +29,15 @@
                FontSize="Medium"/>
         
         <Button Text="Login" TextTransform="None" 
-                CornerRadius="20"
-                HorizontalOptions="CenterAndExpand"
                 Clicked="Button_Clicked"
                 FontFamily="product"
-                FontSize="Medium"
+                FontSize="Large"
+                BackgroundColor="#0081c7"
+                Padding="15"
+                CornerRadius="30"
+                Margin="0, 120, 0, 5"
                 TextColor="White"
-                BackgroundColor="Transparent"
-                BorderWidth="5"
-                BorderColor="#01aef1"/>
+                />
 
     </StackLayout>
 </ContentPage>
